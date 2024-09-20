@@ -51,7 +51,7 @@ public class ActivePulse {
 		System.out.println("Choose workout type: 1. Walking 2. Running 3. Cycling 4. Swimming 5. Boxing 6. Weightlifting");
 		int workoutType = input.nextInt();
 		
-		WorkoutLoggerAndUpdater workout = null;
+		Workout workout = null;
 		
 		System.out.println("Enter duration (in minutes): ");
 		double duration = input.nextDouble();

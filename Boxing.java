@@ -1,4 +1,4 @@
-public class Boxing extends Workout implements WorkoutLoggerAndUpdater{
+public class Boxing extends Workout implements WorkoutUpdater{
 	private int punches;
 	private int rounds;
 	
@@ -30,11 +30,7 @@ public class Boxing extends Workout implements WorkoutLoggerAndUpdater{
 		double totalCalories = ((getPunches()*3.5)-1)+((getDuration()*10)-15);
 		return totalCalories;
 	}
-	@Override
-    public void logWorkout() {
-		WorkOutManager.addWorkout(this);
-        System.out.println("Boxing workout logged: " + getWorkoutDetails());
-    }
+
 
     @Override
     public void updateWorkout(String attribute, Object newValue) throws InvalidAttributeException {

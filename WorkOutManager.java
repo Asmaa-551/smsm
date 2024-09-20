@@ -31,7 +31,8 @@ public class WorkOutManager {
     //         workoutUpdate.setDuration(newDuration);
     //         workoutUpdate.setHeartRate(newHeartRate);
     //         workoutUpdate.setIntensity(newIntensity);
-    //         Swimming swim = new Swimming(newDuration, newHeartRate, newHeartRate, newIntensity, newFeedback, newDuration, newHeartRate);
+    //         workoutUpdate.setFeedback(newFeedback);
+    //         Swimming swim = new Swimming(newDuration, newHeartRate, newHeartRate, newIntensity, newFeedback, newFeedback, newDuration, newFeedback, newHeartRate);
     //         workouts.set(index, swim);
 
     //         System.out.println("Workout updated at index " + index);

@@ -64,7 +64,10 @@ public abstract class Workout {
 	       }
 	}
 	
-
+    public void logWorkout() {
+		WorkOutManager.addWorkout(this);
+        System.out.println("Boxing workout logged: ");
+    }
 	public abstract double calculateCalories();
 	
 	@Override
