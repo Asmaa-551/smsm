@@ -2,8 +2,8 @@ public class Boxing extends Workout implements WorkoutLoggerAndUpdater{
 	private int punches;
 	private int rounds;
 	
-    public Boxing(double duration, int heartRate, char intensity, String feedback, String name ,int punches, int rounds) {
-	super(duration, heartRate, intensity, feedback, name);
+    public Boxing(double duration, int heartRate, char intensity ,int punches, int rounds) {
+	super(duration, heartRate, intensity);
 	this.punches = punches;
 	this.rounds = rounds;
 	

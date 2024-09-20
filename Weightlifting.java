@@ -2,8 +2,8 @@ public class Weightlifting extends Workout implements WorkoutLoggerAndUpdater{
 	private double totalWeightLifted;
 	private int numberOfSets ;
 
-	public Weightlifting(double totalWeightLifted, int numberOfSets, double duration, int heartRate, char intensity, String feedback, String name) {
-		super(duration, heartRate, intensity, feedback, name);
+	public Weightlifting(double totalWeightLifted, int numberOfSets, double duration, int heartRate, char intensity) {
+		super(duration, heartRate, intensity);
 		this.totalWeightLifted = totalWeightLifted;
 		this.numberOfSets = numberOfSets;
 	}

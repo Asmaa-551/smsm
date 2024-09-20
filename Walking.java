@@ -3,8 +3,8 @@ public class Walking extends Workout implements WorkoutLoggerAndUpdater{
 	private double weight;
 	
 
-	public Walking(double duration, int heartRate, char intensity, String feedback, String name ,double walkspeed, double weight) {
-		super(duration, heartRate, intensity, feedback, name);
+	public Walking(double duration, int heartRate, char intensity ,double walkspeed, double weight) {
+		super(duration, heartRate, intensity);
 		this.walkspeed = walkspeed;
 		this.weight = weight;
 		

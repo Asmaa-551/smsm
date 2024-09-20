@@ -3,9 +3,9 @@ public class Cycling extends Workout implements WorkoutLoggerAndUpdater{
     private double cyclingSpeed; 
     private double cyclingDistance; 
 
-    public Cycling(double duration, int caloriesBurned, int heartRate, char intensity, String feedback, String name,
+    public Cycling(double duration, int heartRate, char intensity,
                    double cyclingDistance, double cyclingPower, double cyclingSpeed) {
-        super();
+        super(duration, heartRate, intensity);
         this.cyclingPower = cyclingPower;
         this.cyclingSpeed = cyclingSpeed;
         this.cyclingDistance = cyclingDistance;

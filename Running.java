@@ -1,8 +1,8 @@
 public class Running extends Workout implements WorkoutLoggerAndUpdater{
 	private int speed;
 	private int distance;
-	public Running(int speed, int distance, double duration, int heartRate, char intensity, String feedback, String name) {
-		super(duration, heartRate, intensity, feedback, name);
+	public Running(int speed, int distance, double duration, int heartRate, char intensity) {
+		super(duration, heartRate, intensity);
 		this.speed = speed;
 		this.distance = distance;
 	}
