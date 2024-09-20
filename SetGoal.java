@@ -20,34 +20,36 @@ public class SetGoal {
 
 		if(totalCalories >= goalCaloriesBurned) {
 			ReachGoalC = true ;
-            System.out.println("You Did It!!! ");
+            System.out.println("Congratulations! You have burned " + totalCalories + " calories, reaching your goal of " + goalCaloriesBurned + " calories!");
 		}
 	    else{
-				System.out.println("Work Harder Next Week ");
+            int caloriesLeft = goalCaloriesBurned - totalCalories;
+			System.out.println("Keep going! You need " + caloriesLeft + " more calories to reach your goal of " + goalCaloriesBurned + " calories");
 			}
         
         if(totalDuration >= durationGoal) {
                 ReachGoalD = true ;
-                System.out.println("You Did It!!! ");
+                System.out.println("Great job! You've worked out for " + totalDuration + " minutes, reaching your goal of " + durationGoal + " minutes! ");
         }
          else{
-                    System.out.println("Work Harder Next Week ");
+            double minutesLeft = durationGoal - totalDuration;
+            System.out.println("You're almost there! You need " + minutesLeft + " more minutes to reach your goal of " + durationGoal + " minutes ");
              }
             }
 		
-             public void updateWorkoutProgress(WorkOutManager manager, int index, double extraD, int extraC) {
+            public void updateGoal(WorkOutManager manager, int index, int newgoalCaloriesBurned, double newdurationGoal) {
                 if (index >= 0 && index < manager.getWorkouts().size()) {
-                    Workout workout = manager.getWorkouts().get(index);
-                    workout.setDuration(workout.getDuration() + extraD);
-                    workout.setCaloriesBurned(workout.getCaloriesBurned() + extraC);
-        
-                    System.out.println("Updated workout: " + workout.getName());
-                    System.out.println("New Duration: " + workout.getDuration() + " minutes");
-                    System.out.println("New Calories Burned: " + workout.getCaloriesBurned() + " kcal");
+                    this.goalCaloriesBurned = newgoalCaloriesBurned;
+                    this.durationGoal = newdurationGoal;
+            
+                    System.out.println("Calories Updated Goal: " + goalCaloriesBurned + " kcal");
+                    System.out.println("Duration Updated Goal: " + durationGoal + " minutes");
                 } else {
                     System.out.println("Invalid workout index.");
                 }
             }
+            
+            
         }
 		
 	
