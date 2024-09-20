@@ -1,6 +1,4 @@
 
-import java.util.*;
-import java.io.*; 
 public class SetGoal {
 	private int goalCaloriesBurned;
 	private boolean ReachGoalC;
@@ -32,34 +30,18 @@ public class SetGoal {
 		this.durationGoal = durationGoal;
 	}
 
-
-	public void checkGoalC() {
-		if(goalCaloriesBurned > totalCalories) {
-			ReachGoalC = true ;
-			System.out.println("You Did It!!! ");
-		}
-	    else{
-				System.out.println("Work Harder Next Week ");
-			}
-		
-	public void checkGoalD(){
-		if (durationGoal > duration) {
-				ReachGoalD = true;
-			}
-		
-	public static void updateWorkoutProgress() {
 		
 	}
 		
 		
-		}
-	
-	}
-	
-
+		
 	
 	
 	
 
-}
+	
+	
+	
+
+
 
