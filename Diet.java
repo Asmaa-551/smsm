@@ -5,8 +5,19 @@ public class Diet {
     private ArrayList<Water> water;
 
 
-    public Diet(ArrayList<FoodItem> foodItems) {
-        this.foodItems = foodItems;
+    public Diet() {
+        this.foodItems = new ArrayList<>();
+        this.water = new ArrayList<>();
+    }
+
+    public void addFoodItem(FoodItem foodItem) {
+        foodItems.add(foodItem);
+        System.out.println("Food item logged: " + foodItem.getMealName() + ", " + foodItem.getCalories() + " calories.");
+    }
+
+    public void addWater(Water waterEntry) {
+        water.add(waterEntry);
+        System.out.println("Water intake logged: " + waterEntry.getWaterAmount() + " liters.");
     }
 
 
