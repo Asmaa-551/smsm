@@ -1,4 +1,4 @@
-public class Weightlifting extends Workout implements WorkoutLoggerAndUpdater{
+public class Weightlifting extends Workout implements WorkoutUpdater{
 	private double totalWeightLifted;
 	private int numberOfSets ;
 
@@ -34,12 +34,6 @@ public class Weightlifting extends Workout implements WorkoutLoggerAndUpdater{
 		return super.toString() + "Weightlifitng [totalWeightLifted=" + totalWeightLifted + ", numberOfSets=" + numberOfSets + "]";
 	}
 
-	@Override
-    public void logWorkout() {
-		WorkOutManager.addWorkout(this);
-        System.out.println("Weightlifting workout logged: " + getWorkoutDetails());
-    }
-
     @Override
     public void updateWorkout(String attribute, Object newValue) throws InvalidAttributeException {
 		switch (attribute.toLowerCase()) {
@@ -49,6 +43,18 @@ public class Weightlifting extends Workout implements WorkoutLoggerAndUpdater{
             case "numberofsets":
                 this.numberOfSets = (int) newValue;
                 break;
+				case "duration":
+				setDuration((double) newValue); 
+				break;
+			case "caloriesburned":
+				setCaloriesBurned((int) newValue); 
+				break;
+			case "heartrate":
+				setHeartRate((int) newValue); 
+				break;
+			case "intensity":
+				setIntensity((char) newValue); 
+				break;
             default:
 			throw new InvalidAttributeException("Invalid attribute for Boxing workout: " + attribute);
         }

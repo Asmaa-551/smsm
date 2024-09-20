@@ -1,4 +1,4 @@
-public class Boxing extends Workout implements WorkoutLoggerAndUpdater{
+public class Boxing extends Workout implements WorkoutUpdater{
 	private int punches;
 	private int rounds;
 	
@@ -31,25 +31,32 @@ public class Boxing extends Workout implements WorkoutLoggerAndUpdater{
 		return totalCalories;
 	}
 	@Override
-    public void logWorkout() {
-		WorkOutManager.addWorkout(this);
-        System.out.println("Boxing workout logged: " + getWorkoutDetails());
-    }
-
-    @Override
-    public void updateWorkout(String attribute, Object newValue) throws InvalidAttributeException {
-        switch (attribute.toLowerCase()) {
-            case "punches":
-                this.punches = (int) newValue;
-                break;
-            case "rounds":
-                this.rounds = (int) newValue;
-                break;
-            default:
-			throw new InvalidAttributeException("Invalid attribute for Boxing workout: " + attribute);
-        }
-        System.out.println("Boxing workout updated: " + getWorkoutDetails());
-    }
+	public void updateWorkout(String attribute, Object newValue) throws InvalidAttributeException {
+		switch (attribute.toLowerCase()) {
+			case "punches":
+				this.punches = (int) newValue;
+				break;
+			case "rounds":
+				this.rounds = (int) newValue;
+				break;
+			case "duration":
+				setDuration((double) newValue); 
+				break;
+			case "caloriesburned":
+				setCaloriesBurned((int) newValue); 
+				break;
+			case "heartrate":
+				setHeartRate((int) newValue); 
+				break;
+			case "intensity":
+				setIntensity((char) newValue); 
+				break;
+			default:
+				throw new InvalidAttributeException("Invalid attribute for Boxing workout: " + attribute);
+		}
+		System.out.println("Boxing workout updated: " + getWorkoutDetails());
+	}
+	
 
     @Override
     public String getWorkoutDetails() {

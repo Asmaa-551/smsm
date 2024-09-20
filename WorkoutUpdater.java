@@ -1,5 +1,4 @@
-public interface WorkoutLoggerAndUpdater {
-    void logWorkout();   
+public interface WorkoutUpdater {
     void updateWorkout(String attribute, Object newValue) throws InvalidAttributeException; 
     String getWorkoutDetails();
 }
