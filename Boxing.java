@@ -32,11 +32,22 @@ public class Boxing extends Workout implements WorkoutLoggerAndUpdater{
 	}
 	@Override
     public void logWorkout() {
+		WorkOutManager.addWorkout(this);
         System.out.println("Boxing workout logged: " + getWorkoutDetails());
     }
 
     @Override
-    public void updateWorkout() {
+    public void updateWorkout(String attribute, Object newValue) throws InvalidAttributeException {
+        switch (attribute.toLowerCase()) {
+            case "punches":
+                this.punches = (int) newValue;
+                break;
+            case "rounds":
+                this.rounds = (int) newValue;
+                break;
+            default:
+			throw new InvalidAttributeException("Invalid attribute for Boxing workout: " + attribute);
+        }
         System.out.println("Boxing workout updated: " + getWorkoutDetails());
     }
 

@@ -33,13 +33,24 @@ public class Walking extends Workout implements WorkoutLoggerAndUpdater{
     }
 	@Override
     public void logWorkout() {
+		WorkOutManager.addWorkout(this);
         System.out.println("Walking workout logged: " + getWorkoutDetails());
     }
 
     @Override
-    public void updateWorkout() {
+    public void updateWorkout(String attribute, Object newValue) throws InvalidAttributeException {
+		switch (attribute.toLowerCase()) {
+            case "walkspeed":
+                this.walkspeed = (double) newValue;
+                break;
+            case "weight":
+                this.weight = (double) newValue;
+                break;
+            default:
+			throw new InvalidAttributeException("Invalid attribute for Boxing workout: " + attribute);
+        }
         System.out.println("Walking workout updated: " + getWorkoutDetails());
-    }
+	}
 
     @Override
     public String getWorkoutDetails() {

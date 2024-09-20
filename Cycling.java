@@ -51,11 +51,25 @@ public class Cycling extends Workout implements WorkoutLoggerAndUpdater{
     }
     @Override
     public void logWorkout() {
+        WorkOutManager.addWorkout(this);
         System.out.println("Cycling workout logged: " + getWorkoutDetails());
     }
 
     @Override
-    public void updateWorkout() {
+    public void updateWorkout(String attribute, Object newValue) throws InvalidAttributeException {
+        switch (attribute.toLowerCase()) {
+            case "cyclingpower":
+                this.cyclingPower = (double) newValue;
+                break;
+            case "cyclingspeed":
+                this.cyclingSpeed = (double) newValue;
+                break;
+            case "cyclingdistance":
+                this.cyclingDistance = (double) newValue;
+                break;
+            default:
+            throw new InvalidAttributeException("Invalid attribute for Boxing workout: " + attribute);
+        }
         System.out.println("Cycling workout updated: " + getWorkoutDetails());
     }
 

@@ -36,11 +36,22 @@ public class Weightlifting extends Workout implements WorkoutLoggerAndUpdater{
 
 	@Override
     public void logWorkout() {
+		WorkOutManager.addWorkout(this);
         System.out.println("Weightlifting workout logged: " + getWorkoutDetails());
     }
 
     @Override
-    public void updateWorkout() {
+    public void updateWorkout(String attribute, Object newValue) throws InvalidAttributeException {
+		switch (attribute.toLowerCase()) {
+            case "totalweightlifted":
+                this.totalWeightLifted = (double) newValue;
+                break;
+            case "numberofsets":
+                this.numberOfSets = (int) newValue;
+                break;
+            default:
+			throw new InvalidAttributeException("Invalid attribute for Boxing workout: " + attribute);
+        }
         System.out.println("Weightlifting workout updated: " + getWorkoutDetails());
     }
 
