@@ -1,8 +1,9 @@
 import java.util.Scanner;
 
 public class ActivePulse {
+
+	private static WorkoutManager workoutManager = new WorkoutManager();
 	public static void main(String[] args) {
-	
 		int userChoice;
 		do {
 			DislayMenu();
@@ -60,9 +61,21 @@ public class ActivePulse {
 		// To be completed. Feel free to change the input parameters. 
 	}
 	
-	public static void GeneratePerformanceReports(){
-		// To be completed. Feel free to change the input parameters. 
-	}
+	public static void GeneratePerformanceReports() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Choose report type: 1. Weekly 2. Monthly");
+        int reportType = input.nextInt();
+
+        Performance performance = new Performance(workoutManager.getWorkouts());
+
+        if (reportType == 1) {
+            performance.generateWeeklyReport();
+        } else if (reportType == 2) {
+            performance.generateMonthlyReport();
+        } else {
+            System.out.println("Invalid report type selected.");
+        }
+    }
 
 	public static void NewExtraFunctionality(){
 		// To be completed. Feel free to change the input parameters. 

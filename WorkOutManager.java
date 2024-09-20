@@ -1,10 +1,9 @@
 import java.util.ArrayList;
-import java.util.List;
 
-public class WorkOutManager {
-    private List<Workout> workouts;
+public class WorkoutManager {
+    private ArrayList<Workout> workouts;
 
-    public WorkOutManager() {
+    public WorkoutManager() {
         workouts = new ArrayList<>();
     }
 
@@ -39,7 +38,7 @@ public class WorkOutManager {
         }
     }
 
-    public List<Workout> getWorkouts() {
+    public ArrayList<Workout> getWorkouts() {
         return workouts;
     }
 }

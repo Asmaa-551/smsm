@@ -1,10 +1,10 @@
-public class Swim extends Workout implements WorkoutLog,WorkoutUpdate{
+public class Swimming extends Workout implements WorkoutLog,WorkoutUpdate{
     private double underwaterDepth;
     private String swimwingStyle;
     private int laps;
 
 
-    public Swim(double duration, int caloriesBurned, int heartRate, char intensity, String feedback, String name,
+    public Swimming(double duration, int caloriesBurned, int heartRate, char intensity, String feedback, String name,
                 double underwaterDepth, String swimwingStyle, int laps) {
         super(); 
         this.underwaterDepth = underwaterDepth;
