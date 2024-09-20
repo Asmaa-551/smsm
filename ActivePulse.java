@@ -30,7 +30,7 @@ public class ActivePulse {
 		System.out.println("3. Set or update fitness goals.");
 		System.out.println("4. View progress toward goals.");
 		System.out.println("5. Generate performance reports (weekly, monthly, etc.)");
-		System.out.println("6. NEW extra functionality of your choice. BE INNOVATIVE.");
+		System.out.println("6. Log nutritional intake (meals and water).");
 		System.out.println("0. Exit");
 		System.out.println("------------------------------------------------------------");
 	}
