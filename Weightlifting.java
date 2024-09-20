@@ -1,4 +1,4 @@
-public class Weightlifting extends Workout{
+public class Weightlifting extends Workout implements WorkoutLoggerAndUpdater{
 	private double totalWeightLifted;
 	private int numberOfSets ;
 
@@ -33,5 +33,20 @@ public class Weightlifting extends Workout{
 	public String toString() {
 		return super.toString() + "Weightlifitng [totalWeightLifted=" + totalWeightLifted + ", numberOfSets=" + numberOfSets + "]";
 	}
+
+	@Override
+    public void logWorkout() {
+        System.out.println("Weightlifting workout logged: " + getWorkoutDetails());
+    }
+
+    @Override
+    public void updateWorkout() {
+        System.out.println("Weightlifting workout updated: " + getWorkoutDetails());
+    }
+
+    @Override
+    public String getWorkoutDetails() {
+        return "Total Weight Lifted: " + getTotalWeightLifted() + ", Number Of Sets: " + getNumberOfSets();
+    }
 	
 }

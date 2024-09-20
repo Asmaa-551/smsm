@@ -1,4 +1,4 @@
-public class Boxing extends Workout {
+public class Boxing extends Workout implements WorkoutLoggerAndUpdater{
 	private int punches;
 	private int rounds;
 	
@@ -30,5 +30,19 @@ public class Boxing extends Workout {
 		double totalCalories = ((getPunches()*3.5)-1)+((getDuration()*10)-15);
 		return totalCalories;
 	}
+	@Override
+    public void logWorkout() {
+        System.out.println("Boxing workout logged: " + getWorkoutDetails());
+    }
+
+    @Override
+    public void updateWorkout() {
+        System.out.println("Boxing workout updated: " + getWorkoutDetails());
+    }
+
+    @Override
+    public String getWorkoutDetails() {
+        return "Punches: " + getPunches() + ", Rounds: " + getRounds();
+    }
 	
 }

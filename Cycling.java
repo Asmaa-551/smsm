@@ -1,4 +1,4 @@
-public class Cycling extends Workout implements WorkoutLog, WorkoutUpdate{
+public class Cycling extends Workout implements WorkoutLoggerAndUpdater{
     private double cyclingPower; 
     private double cyclingSpeed; 
     private double cyclingDistance; 
@@ -51,11 +51,16 @@ public class Cycling extends Workout implements WorkoutLog, WorkoutUpdate{
     }
     @Override
     public void logWorkout() {
-        System.out.println("Log Cycling Workout: CyclingPower: " + cyclingPower + " Watts, Distance: " + cyclingDistance + " km." + "Speed:" + cyclingSpeed + "km/h");
+        System.out.println("Cycling workout logged: " + getWorkoutDetails());
     }
 
     @Override
     public void updateWorkout() {
-        System.out.println("Updating Cycling Workout: Enter new info...");
+        System.out.println("Cycling workout updated: " + getWorkoutDetails());
+    }
+
+    @Override
+    public String getWorkoutDetails() {
+        return "Cycling Power: " + getCyclingPower() + ", Cycling Speed: " + getCyclingSpeed() + ", Cycling Distance: " + getCyclingDistance();
     }
 }
