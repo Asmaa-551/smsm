@@ -1,10 +1,10 @@
-public class Walking extends Workout implements WorkoutLoggerAndUpdater{
+public class Walking extends Workout implements WorkoutUpdater{
 	private double walkspeed;
 	private double weight;
 	
 
-	public Walking(double duration, int heartRate, char intensity, String feedback, String name ,double walkspeed, double weight) {
-		super(duration, heartRate, intensity, feedback, name);
+	public Walking(double duration, int heartRate, char intensity ,double walkspeed, double weight) {
+		super(duration, heartRate, intensity);
 		this.walkspeed = walkspeed;
 		this.weight = weight;
 		
@@ -31,12 +31,6 @@ public class Walking extends Workout implements WorkoutLoggerAndUpdater{
         double totalCalories = (getIntensity()-1) * getWeight() * getDuration();
         return totalCalories;
     }
-	@Override
-    public void logWorkout() {
-		WorkOutManager.addWorkout(this);
-        System.out.println("Walking workout logged: " + getWorkoutDetails());
-    }
-
     @Override
     public void updateWorkout(String attribute, Object newValue) throws InvalidAttributeException {
 		switch (attribute.toLowerCase()) {
@@ -46,6 +40,18 @@ public class Walking extends Workout implements WorkoutLoggerAndUpdater{
             case "weight":
                 this.weight = (double) newValue;
                 break;
+				case "duration":
+				setDuration((double) newValue); 
+				break;
+			case "caloriesburned":
+				setCaloriesBurned((int) newValue); 
+				break;
+			case "heartrate":
+				setHeartRate((int) newValue); 
+				break;
+			case "intensity":
+				setIntensity((char) newValue); 
+				break;
             default:
 			throw new InvalidAttributeException("Invalid attribute for Boxing workout: " + attribute);
         }

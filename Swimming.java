@@ -1,11 +1,11 @@
-public class Swimming extends Workout implements WorkoutLoggerAndUpdater {
+public class Swimming extends Workout implements WorkoutUpdater {
     private double underwaterDepth;
     private String swimwingStyle;
     private int laps;
 
-    public Swimming(double duration, int caloriesBurned, int heartRate, char intensity, String feedback, String name,
+    public Swimming(double duration, int heartRate, char intensity,
                     double underwaterDepth, String swimwingStyle, int laps) {
-        super(); 
+        super(duration, heartRate, intensity); 
         this.underwaterDepth = underwaterDepth;
         this.swimwingStyle = swimwingStyle;
         this.laps = laps;
@@ -66,12 +66,6 @@ public class Swimming extends Workout implements WorkoutLoggerAndUpdater {
     }
 
     @Override
-    public void logWorkout() {
-        WorkOutManager.addWorkout(this);
-        System.out.println("Swimming workout logged: " + getWorkoutDetails());
-    }
-
-    @Override
     public void updateWorkout(String attribute, Object newValue) throws InvalidAttributeException {
         switch (attribute.toLowerCase()) {
             case "underwaterdepth":
@@ -83,6 +77,18 @@ public class Swimming extends Workout implements WorkoutLoggerAndUpdater {
             case "laps":
                 this.laps = (int) newValue;
                 break;
+                case "duration":
+				setDuration((double) newValue); 
+				break;
+			case "caloriesburned":
+				setCaloriesBurned((int) newValue); 
+				break;
+			case "heartrate":
+				setHeartRate((int) newValue); 
+				break;
+			case "intensity":
+				setIntensity((char) newValue); 
+				break;
             default:
             throw new InvalidAttributeException("Invalid attribute for Boxing workout: " + attribute);
         }
