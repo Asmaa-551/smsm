@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class ActivePulse {
 
-	private static WorkoutManager workoutManager = new WorkoutManager();
+	private static WorkOutManager workoutManager = new WorkOutManager();
 	public static void main(String[] args) {
 		int userChoice;
 		do {

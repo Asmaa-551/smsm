@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
-public class WorkoutManager {
+public class WorkOutManager {
     private ArrayList<Workout> workouts;
 
-    public WorkoutManager() {
+    public WorkOutManager() {
         workouts = new ArrayList<>();
     }
 
@@ -32,6 +32,9 @@ public class WorkoutManager {
             workoutUpdate.setHeartRate(newHeartRate);
             workoutUpdate.setIntensity(newIntensity);
             workoutUpdate.setFeedback(newFeedback);
+            Swimming swim = new Swimming(newDuration, newHeartRate, newHeartRate, newIntensity, newFeedback, newFeedback, newDuration, newFeedback, newHeartRate);
+            workouts.set(index, swim);
+            
             System.out.println("Workout updated at index " + index);
         } else {
             System.out.println("Invalid index");

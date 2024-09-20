@@ -1,4 +1,4 @@
-public class Running extends Workout{
+public class Running extends Workout implements WorkoutLoggerAndUpdater{
 	private int speed;
 	private int distance;
 	public Running(int speed, int distance, double duration, int heartRate, char intensity, String feedback, String name) {
@@ -24,6 +24,20 @@ public class Running extends Workout{
         int caloriesBurned;
         caloriesBurned = (int) (intensity(getIntensity()) * (getDuration()/speed) * this.distance);
         return caloriesBurned;
+    }
+
+	@Override
+    public void logWorkout() {
+        System.out.println("Running workout logged: " + getWorkoutDetails());
+    }
+    @Override
+    public void updateWorkout() {
+        System.out.println("Running workout updated: " + getWorkoutDetails());
+    }
+
+    @Override
+    public String getWorkoutDetails() {
+        return "Speed: " + getSpeed() + ", Distance: " + getDistance();
     }
 
 }
