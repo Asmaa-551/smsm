@@ -10,7 +10,7 @@ public class ActivePulse {
 			userChoice = UserMenuChoice();
 			switch (userChoice) {
 				case 1: LogNewWorkout(); break; 	
-				case 2: UpdateWorkout(); break;	
+				case 2: UpdateWorkout(null, null); break;	
 				case 3: SetUpdateFitnessGoals(); break;	
 				case 4: ViewProgress(); break;		
 				case 5: GeneratePerformanceReports(); break;	
@@ -21,6 +21,11 @@ public class ActivePulse {
 		}while (userChoice != 0);
 	}
 	
+	private static void NewExtraFunctionality() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'NewExtraFunctionality'");
+	}
+
 	public static void DislayMenu() {
 		System.out.println("------------------------------------------------------------");
 		System.out.println("Personal Fitness Tracker System (ActivePulse, Fall 24-25)");
@@ -49,9 +54,54 @@ public class ActivePulse {
 		// To be completed. Feel free to change the input parameters. 
 	}
 
-	public static void UpdateWorkout(){
-		// To be completed. Feel free to change the input parameters.  
+	public static void UpdateWorkout(Workout workout, Scanner input) {
+		if (workout == null) {
+			System.out.println("No workout to update.");
+		}
+	
+		System.out.println("Enter attribute to update (e.g., duration, caloriesburned, heartrate, intensity, underwaterdepth, swimmingstyle, laps): ");
+		String attribute = input.next().toLowerCase();
+		Object newValue = null;
+	
+		switch (attribute) {
+			case "underwaterdepth":
+			case "cyclingpower":
+			case "cyclingspeed":
+			case "weight":
+			case "totalweightlifted":
+			case "walkspeed":
+				System.out.println("Enter new value (double): ");
+				newValue = input.nextDouble();
+				break;
+			case "laps":
+			case "punches":
+			case "rounds":
+			case "numberofsets":
+			case "distance":
+				System.out.println("Enter new value (int): ");
+				newValue = input.nextInt();
+				break;
+			case "intensity":
+				System.out.println("Enter new value (char): ");
+				newValue = input.next().charAt(0);
+				break;
+			case "duration":
+				System.out.println("Enter new duration (in minutes): ");
+				newValue = input.nextDouble();
+				break;
+			case "caloriesburned":
+				System.out.println("Enter new calories burned: ");
+				newValue = input.nextInt();
+				break;
+			case "heartrate":
+				System.out.println("Enter new heart rate: ");
+				newValue = input.nextInt();
+				break;
+			default:
+				System.out.println("Invalid attribute type. Please try again.");
+		}
 	}
+	
 
 	public static void SetUpdateFitnessGoals(){
 		// To be completed. Feel free to change the input parameters.  
@@ -76,8 +126,5 @@ public class ActivePulse {
             System.out.println("Invalid report type selected.");
         }
     }
-
-	public static void NewExtraFunctionality(){
-		// To be completed. Feel free to change the input parameters. 
-	}
+	
 }
