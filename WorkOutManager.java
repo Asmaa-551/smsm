@@ -24,23 +24,6 @@ public class WorkOutManager {
 
         }
     }
-
-    // public void updateWorkout(int index, double newDuration, int newHeartRate, char newIntensity, String newFeedback) {
-    //     if (index >= 0 && index < workouts.size()) {
-    //         Workout workoutUpdate = workouts.get(index);
-    //         workoutUpdate.setDuration(newDuration);
-    //         workoutUpdate.setHeartRate(newHeartRate);
-    //         workoutUpdate.setIntensity(newIntensity);
-    //         workoutUpdate.setFeedback(newFeedback);
-    //         Swimming swim = new Swimming(newDuration, newHeartRate, newHeartRate, newIntensity, newFeedback, newFeedback, newDuration, newFeedback, newHeartRate);
-    //         workouts.set(index, swim);
-
-    //         System.out.println("Workout updated at index " + index);
-    //     } else {
-    //         System.out.println("Invalid index");
-    //     }
-    // }
-
     public ArrayList<Workout> getWorkouts() {
         return workouts;
     }
