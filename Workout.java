@@ -17,9 +17,8 @@ public abstract class Workout {
 		this.intensity = intensity;
 		this.dateTime = LocalDateTime.now();
 	}
-
-
-
+	public abstract double calculateCalories();
+	
 	public LocalDateTime getDateTime() {
 		return dateTime;
 	}
@@ -66,10 +65,9 @@ public abstract class Workout {
 	
     public void logWorkout() {
 		WorkOutManager.addWorkout(this);
-        System.out.println("Boxing workout logged: ");
+        System.out.println("Workout logged: " + getWorkoutDetails());
     }
-	public abstract double calculateCalories();
-	
+
 	@Override
 	public String toString() {
 		return "Workout [duration=" + duration + ", caloriesBurned=" + caloriesBurned
