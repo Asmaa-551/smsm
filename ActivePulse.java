@@ -6,6 +6,8 @@ import java.util.ArrayList;
 public class ActivePulse {
 
 	private static WorkOutManager workoutManager = new WorkOutManager();
+	private static Diet diet = new Diet();
+
 	public static void main(String[] args) {
 		int userChoice;
 		do {
@@ -25,7 +27,6 @@ public class ActivePulse {
 	}
 	
 	private static void NewExtraFunctionality() {
-		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'NewExtraFunctionality'");
 	}
 
@@ -134,7 +135,7 @@ public class ActivePulse {
 	}
 
 	public static void UpdateWorkout() {
-		
+
     ArrayList<Workout> workouts = workoutManager.getWorkouts();
 	if (workouts.isEmpty()) {
         System.out.println("No workouts available to update.");
@@ -312,5 +313,35 @@ public class ActivePulse {
             System.out.println("Invalid report type selected.");
         }
     }
+
+	public static void logFoodOrWater() {
+		Scanner input = new Scanner(System.in);
+	
+		System.out.println("Choose an option: 1. Log Meal 2. Log Water");
+		int choice = input.nextInt();
+	
+		if (choice == 1) {
+			System.out.println("Enter meal name: ");
+			String mealName = input.next();
+			System.out.println("Enter calories: ");
+			int calories = input.nextInt();
+			System.out.println("Enter protein amount: ");
+			double proteins = input.nextDouble();
+	
+			FoodItem foodItem = new FoodItem(mealName, calories, proteins);
+			diet.addFoodItem(foodItem);
+		} else if (choice == 2) {
+			System.out.println("Enter water amount (in liters): ");
+			double waterAmount = input.nextDouble();
+	
+			Water waterEntry = new Water(waterAmount);
+			diet.addWater(waterEntry);
+		} else {
+			System.out.println("Invalid choice. Please select 1 or 2.");
+		}
+	}
+
 	
 }
+
+
