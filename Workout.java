@@ -5,21 +5,17 @@ public abstract class Workout {
 	private int caloriesBurned; 
 	private int heartRate; 
 	private char intensity;
-	private String feedback;
 	private LocalDateTime dateTime;
-	private String name;
 	
 	public Workout() {
 		this.dateTime = LocalDateTime.now();
 	}
 	
-	public Workout(double duration, int heartRate, char intensity, String feedback, String name) {
+	public Workout(double duration, int heartRate, char intensity) {
 		this.duration = duration;
 		this.heartRate = heartRate;
 		this.intensity = intensity;
-		this.feedback = feedback;
 		this.dateTime = LocalDateTime.now();
-		this.name = name;
 	}
 
 
@@ -54,13 +50,7 @@ public abstract class Workout {
 		this.intensity = intensity;
 	}
 	
-	public String getFeedback() {
-		return feedback;
-	}
-	public void setFeedback(String feedback) {
-		this.feedback = feedback;
-	}
-	
+
 	public double intensity(char intensity) {
 	    switch (intensity) {
 	        case 'L':
@@ -74,16 +64,10 @@ public abstract class Workout {
 	       }
 	}
 	
-	
-	
-    public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
+    public void logWorkout() {
+		WorkOutManager.addWorkout(this);
+        System.out.println("Boxing workout logged: ");
+    }
 	public abstract double calculateCalories();
 	
 	@Override

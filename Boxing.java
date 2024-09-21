@@ -2,8 +2,8 @@ public class Boxing extends Workout implements WorkoutUpdater{
 	private int punches;
 	private int rounds;
 	
-    public Boxing(double duration, int heartRate, char intensity, String feedback, String name ,int punches, int rounds) {
-	super(duration, heartRate, intensity, feedback, name);
+    public Boxing(double duration, int heartRate, char intensity ,int punches, int rounds) {
+	super(duration, heartRate, intensity);
 	this.punches = punches;
 	this.rounds = rounds;
 	
@@ -30,6 +30,7 @@ public class Boxing extends Workout implements WorkoutUpdater{
 		double totalCalories = ((getPunches()*3.5)-1)+((getDuration()*10)-15);
 		return totalCalories;
 	}
+
 	@Override
 	public void updateWorkout(String attribute, Object newValue) throws InvalidAttributeException {
 		switch (attribute.toLowerCase()) {
@@ -41,9 +42,6 @@ public class Boxing extends Workout implements WorkoutUpdater{
 				break;
 			case "duration":
 				setDuration((double) newValue); 
-				break;
-			case "caloriesburned":
-				setCaloriesBurned((int) newValue); 
 				break;
 			case "heartrate":
 				setHeartRate((int) newValue); 
@@ -57,6 +55,7 @@ public class Boxing extends Workout implements WorkoutUpdater{
 		System.out.println("Boxing workout updated: " + getWorkoutDetails());
 	}
 	
+
 
     @Override
     public String getWorkoutDetails() {

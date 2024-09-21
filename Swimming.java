@@ -3,9 +3,9 @@ public class Swimming extends Workout implements WorkoutUpdater {
     private String swimwingStyle;
     private int laps;
 
-    public Swimming(double duration, int caloriesBurned, int heartRate, char intensity, String feedback, String name,
+    public Swimming(double duration, int heartRate, char intensity,
                     double underwaterDepth, String swimwingStyle, int laps) {
-        super(); 
+        super(duration, heartRate, intensity); 
         this.underwaterDepth = underwaterDepth;
         this.swimwingStyle = swimwingStyle;
         this.laps = laps;

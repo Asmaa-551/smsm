@@ -50,8 +50,84 @@ public class ActivePulse {
 		return choice;
 	}
 	
-	public static void LogNewWorkout(){
-		// To be completed. Feel free to change the input parameters. 
+	public static void LogNewWorkout() {
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("Choose workout type: 1. Walking 2. Running 3. Cycling 4. Swimming 5. Boxing 6. Weightlifting");
+		int workoutType = input.nextInt();
+		
+		Workout workout = null;
+		
+		System.out.println("Enter duration (in minutes): ");
+		double duration = input.nextDouble();
+		System.out.println("Enter heart rate (in bpm): ");
+		int heartRate = input.nextInt();
+		System.out.println("Enter intensity (e.g., A, B, C): ");
+		char intensity = input.next().charAt(0);
+
+	
+		switch (workoutType) {
+			case 1: // Walking
+				System.out.println("Enter walk speed (in km/h): ");
+				double walkSpeed = input.nextDouble();
+				System.out.println("Enter your weight (in kg): ");
+				double weight = input.nextDouble();
+				workout = new Walking( duration, heartRate, intensity , walkSpeed, weight);
+				break;
+	
+			case 2: // Running
+				System.out.println("Enter distance (in kilometers): ");
+				int runningDistance = input.nextInt();
+				System.out.println("Enter walk speed (in km/h): ");
+				int speed = input.nextInt();
+				workout = new Running(speed, runningDistance, duration, heartRate, intensity);
+				break;
+	
+			case 3: // Cycling
+				System.out.println("Enter cycling power (in watts): ");
+				double cyclingPower = input.nextDouble();
+				System.out.println("Enter cycling speed (in km/h): ");
+				double cyclingSpeed = input.nextDouble();
+				System.out.println("Enter cycling distance (in kilometers): ");
+				double cyclingDistance = input.nextDouble();
+				workout = new Cycling( duration, heartRate, intensity,cyclingDistance, cyclingPower, cyclingSpeed);
+				break;
+	
+			case 4: // Swimming
+				System.out.println("Enter underwater depth (in meters): ");
+				double underwaterDepth = input.nextDouble();
+				System.out.println("Enter swimming style (freestyle, breaststroke, backstroke, butterfly): ");
+				String swimmingStyle = input.next();
+				System.out.println("Enter number of laps: ");
+				int laps = input.nextInt();
+				
+				workout = new Swimming( duration, heartRate, intensity, underwaterDepth, swimmingStyle, laps);
+				break;
+	
+			case 5: // Boxing
+				System.out.println("Enter number of punches: ");
+				int punches = input.nextInt();
+				System.out.println("Enter number of rounds: ");
+				int rounds = input.nextInt();
+				workout = new Boxing( duration, heartRate, intensity , punches, rounds);
+				break;
+	
+			case 6: // Weightlifting
+				System.out.println("Enter total weight lifted (in kg): ");
+				double totalWeightLifted = input.nextDouble();
+				System.out.println("Enter number of sets: ");
+				int numberOfSets = input.nextInt();
+				workout = new Weightlifting( totalWeightLifted, numberOfSets, duration, heartRate, intensity);
+				break;
+	
+			default:
+				System.out.println("Invalid workout type selected.");
+				return;
+		}
+	
+		if (workout != null) {
+			workout.logWorkout();
+		}
 	}
 
 	public static void UpdateWorkout(Workout workout, Scanner input) {
