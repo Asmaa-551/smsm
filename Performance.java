@@ -4,30 +4,41 @@ import java.util.List;
 
 public class Performance {
     private List<Workout> workouts;
+    private List<Water> water;
+    private List<FoodItem> foodItems;
+
 
     public Performance(ArrayList<Workout> workouts) {
         this.workouts = workouts;
     }
-    public Performance(List<Workout> workouts) {
+    public Performance(List<Workout> workouts, List<Water> water, List<FoodItem> foodItems) {
         this.workouts = workouts;
+        this.water = water;
+        this.foodItems = foodItems;
     }
 
-     public void generateWeeklyReport() {
+    public void generateWeeklyReport() {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime oneWeekAgo = now.minusDays(7);
-
+    
         ArrayList<Workout> weeklyWorkouts = filterWorkoutsByDate(oneWeekAgo, now);
+        ArrayList<FoodItem> weeklyFoodItems = filterFoodByDate(oneWeekAgo, now);
+        ArrayList<Water> weeklyWater = filterWaterByDate(oneWeekAgo, now);
+    
         System.out.println("Weekly Performance Report:");
-        generateReport(weeklyWorkouts);
+        generateReport(weeklyWorkouts, weeklyFoodItems, weeklyWater);
     }
-
+    
     public void generateMonthlyReport() {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime oneMonthAgo = now.minusDays(30);
-
+    
         ArrayList<Workout> monthlyWorkouts = filterWorkoutsByDate(oneMonthAgo, now);
+        ArrayList<FoodItem> monthlyFoodItems = filterFoodByDate(oneMonthAgo, now);
+        ArrayList<Water> monthlyWater = filterWaterByDate(oneMonthAgo, now);
+    
         System.out.println("Monthly Performance Report:");
-        generateReport(monthlyWorkouts);
+        generateReport(monthlyWorkouts, monthlyFoodItems, monthlyWater);
     }
 
     private ArrayList<Workout> filterWorkoutsByDate(LocalDateTime startDateTime, LocalDateTime endDateTime) {
@@ -43,8 +54,28 @@ public class Performance {
         return filteredWorkouts; 
     }
 
-    public void generateReport(ArrayList<Workout> filteredWorkouts) {
-        int totalCalories = 0;
+    public ArrayList<FoodItem> filterFoodByDate(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        ArrayList<FoodItem> filteredFoodItems = new ArrayList<>();
+        for (FoodItem item : foodItems) {
+            if (!item.getDateLogged().isBefore(startDateTime) && !item.getDateLogged().isAfter(endDateTime)) {
+                filteredFoodItems.add(item);
+            }
+        }
+        return filteredFoodItems;
+    }
+
+    public ArrayList<Water> filterWaterByDate(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        ArrayList<Water> filteredWater = new ArrayList<>();
+        for (Water waterEntry : water) {
+            if (!waterEntry.getIntakeDateTime().isBefore(startDateTime) && !waterEntry.getIntakeDateTime().isAfter(endDateTime)) {
+                filteredWater.add(waterEntry);
+            }
+        }
+        return filteredWater;
+    }
+
+    public void generateReport(ArrayList<Workout> filteredWorkouts, ArrayList<FoodItem> filteredFoodItems, ArrayList<Water> filteredWater) {
+        int totalCaloriesBurned = 0;
         double totalDuration = 0;
     
         // Accumulators for averages and counts
@@ -64,8 +95,9 @@ public class Performance {
         int runningCount = 0, cyclingCount = 0, swimmingCount = 0, walkingCount = 0, boxingCount = 0, weightliftingCount = 0;
     
         for (Workout workout : filteredWorkouts) {
-            totalCalories += workout.getCaloriesBurned();
-            totalDuration += workout.getDuration();
+            int calories = (int) workout.calculateCalories();
+            totalCaloriesBurned += calories;
+            totalDuration += (int) workout.getDuration();
     
             if (workout instanceof Running) {
                 Running run = (Running) workout;
@@ -99,9 +131,30 @@ public class Performance {
                 weightliftingCount++;
             }
         }
+        
+        int totalFoodCalories = 0;
+        double totalWaterIntake = 0;
+        int totalProteinsConsumed = 0;
     
-        System.out.println("Overall Total Duration: " + totalDuration + " hours");
-        System.out.println("Overall Total Calories Burned: " + totalCalories + " calories");
+        for (FoodItem item : filteredFoodItems) {
+            totalFoodCalories += item.getCalories();
+            totalProteinsConsumed += item.getProteins();
+
+        }
+    
+        for (Water waterEntry : filteredWater) {
+            totalWaterIntake += waterEntry.getWaterAmount();
+        }
+    
+        int netCalories = totalFoodCalories - totalCaloriesBurned;
+
+        System.out.println("Overall Total Duration: " + totalDuration / 60 + " hours");
+        System.out.println("Overall Total Calories Burned: " + totalCaloriesBurned + " calories");
+        System.out.println("Net Calories (Consumed - Burned): " + netCalories + " calories");
+        System.out.println("Total Water Consumed: " + totalWaterIntake + " liters");
+        System.out.println("Total Proteins Consumed: " + totalProteinsConsumed + " grams");
+
+
     
         if (runningCount > 0) {
             double avgSpeed = totalRunningSpeed / runningCount;

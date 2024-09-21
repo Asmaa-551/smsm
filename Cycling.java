@@ -75,7 +75,7 @@ public class Cycling extends Workout implements WorkoutUpdater{
 				setIntensity((char) newValue); 
 				break;
             default:
-            throw new InvalidAttributeException("Invalid attribute for Boxing workout: " + attribute);
+            throw new InvalidAttributeException("Invalid attribute for this workout: " + attribute);
         }
         System.out.println("Cycling workout updated: " + getWorkoutDetails());
     }
