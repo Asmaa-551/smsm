@@ -9,7 +9,6 @@ public class ActivityManager {
 
     public static void addWorkout(Workout workout) {
         workouts.add(workout);
-        System.out.println("Workout added at " + workout.getDateTime());
     }
 
     public void displayWorkouts() {
