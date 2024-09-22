@@ -20,6 +20,17 @@ public class Diet {
         System.out.println("Water intake logged: " + waterEntry.getWaterAmount() + " liters.");
     }
 
+    public ArrayList<FoodItem> getFoodItem()
+    {
+        return foodItems;
+    }
+
+    public ArrayList<Water> getwater()
+    {
+        return water;
+    }
+
+
 
     public int calculateTotalCalories() {
         int totalCalories = 0;

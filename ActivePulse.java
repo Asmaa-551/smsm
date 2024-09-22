@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -7,6 +6,8 @@ public class ActivePulse {
 
 	private static WorkOutManager workoutManager = new WorkOutManager();
 	private static Diet diet = new Diet();
+	private static SetGoal goal = new SetGoal();
+
 
 	public static void main(String[] args) {
 		int userChoice;
@@ -15,31 +16,27 @@ public class ActivePulse {
 			userChoice = UserMenuChoice();
 			switch (userChoice) {
 				case 1: LogNewWorkout(); break; 	
-				case 2: UpdateWorkout(); break;	
-				case 3: SetUpdateFitnessGoals(); break;	
-				case 4: ViewProgress(); break;		
-				case 5: GeneratePerformanceReports(); break;	
-				case 6: NewExtraFunctionality(); break;	
+				case 2: logFoodOrWater(); break;	
+				case 3: UpdateWorkout(); break;	
+				case 4: SetUpdateFitnessGoals(); break;		
+				case 5: ViewProgress(); break;	
+				case 6: GeneratePerformanceReports(); break;	
 
 				default:  System.out.println("Thank You for Using CSC301's ActivePulse (A Personal Fitness Tracker App), Have a Nice Day.");
 			}
 		}while (userChoice != 0);
 	}
 	
-	private static void NewExtraFunctionality() {
-		throw new UnsupportedOperationException("Unimplemented method 'NewExtraFunctionality'");
-	}
-
 	public static void DislayMenu() {
 		System.out.println("------------------------------------------------------------");
 		System.out.println("Personal Fitness Tracker System (ActivePulse, Fall 24-25)");
 		System.out.println("------------------------------------------------------------");
 		System.out.println("1. Log a new workout (Running, Cycling, Weightlifting, Swimming, ...)");
-		System.out.println("2. Update workout details (duration, distance, calories, etc.)");
-		System.out.println("3. Set or update fitness goals.");
-		System.out.println("4. View progress toward goals.");
-		System.out.println("5. Generate performance reports (weekly, monthly, etc.)");
-		System.out.println("6. Log nutritional intake (meals and water).");
+		System.out.println("2. Log nutritional intake (meals and water).");
+		System.out.println("3. Update workout details (duration, distance, calories, etc.)");
+		System.out.println("4. Set or update fitness goals.");
+		System.out.println("5. View progress toward goals.");
+		System.out.println("6. Generate performance reports (weekly, monthly, etc.)");
 		System.out.println("0. Exit");
 		System.out.println("------------------------------------------------------------");
 	}
@@ -291,11 +288,35 @@ public class ActivePulse {
 	
 
 	public static void SetUpdateFitnessGoals(){
-		// To be completed. Feel free to change the input parameters.  
+		goal.setUpdateGoals();
+
 	}
 
-	public static void ViewProgress(){
-		// To be completed. Feel free to change the input parameters. 
+	public static void ViewProgress() {
+		Scanner input = new Scanner(System.in);
+		
+		// Ask the user which goals they want to check
+		System.out.println("Which goals would you like to check?");
+		System.out.println("1 - Daily Goals");
+		System.out.println("2 - Weekly Goals");
+		System.out.println("3 - Monthly Goals");
+	
+		int choice = input.nextInt();
+			
+		switch (choice) {
+			case 1:
+				goal.checkDailyGoals(workoutManager, diet.getwater(), diet.getFoodItem());
+				break;
+			case 2:
+				goal.checkWeeklyGoals(workoutManager, diet.getwater(), diet.getFoodItem());
+				break;
+			case 3:
+				goal.checkMonthlyGoals(workoutManager, diet.getwater(), diet.getFoodItem());
+				break;
+
+			default:
+				System.out.println("Invalid choice. Please select a valid option.");
+		}
 	}
 	
 	public static void GeneratePerformanceReports() {
@@ -303,7 +324,7 @@ public class ActivePulse {
         System.out.println("Choose report type: 1. Weekly 2. Monthly");
         int reportType = input.nextInt();
 
-        Performance performance = new Performance(workoutManager.getWorkouts());
+        Performance performance = new Performance(workoutManager.getWorkouts(), diet.getwater(), diet.getFoodItem());
 
         if (reportType == 1) {
             performance.generateWeeklyReport();
