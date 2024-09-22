@@ -142,18 +142,19 @@ public class ActivePulse {
 	
 		System.out.println("Select a workout to update:");
 		for (int i = 0; i < workouts.size(); i++) {
-			System.out.println((i + 1) + ". " + workouts.get(i).getWorkoutDetails());
+			System.out.println((i + 1) +  ". " +" (Type: " + workouts.get(i).getClass().getSimpleName() + ") "+ workouts.get(i).getWorkoutDetails() );
 		}
 	
 		System.out.println("Enter the number of the workout you want to update: ");
 		int workoutChoice = input.nextInt();
+
 	
 		if (workoutChoice < 1 || workoutChoice > workouts.size()) {
 			System.out.println("Invalid workout number. Please try again.");
 			return;
 		}
 	
-		Workout selectedWorkout = workouts.get(workoutChoice - 1);
+      WorkoutUpdater selectedWorkout = (WorkoutUpdater) workouts.get(workoutChoice - 1);
 	
 		System.out.println("Select an attribute to update:");
 		System.out.println("1. Duration");

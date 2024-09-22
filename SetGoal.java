@@ -209,6 +209,10 @@ public class SetGoal {
     }
 
     public void checkGoal(String goalType, double currentValue, double goalValue, LocalDateTime startTime, String period) {
+        if (goalValue <= 0) {
+            System.out.println("Goal for " + goalType + " is not set.");
+            return;
+        }
         if (currentValue >= goalValue) {
             System.out.println("Congratulations! You've reached your " + goalType + " goal of " + goalValue + ".");
         } else {
