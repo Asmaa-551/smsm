@@ -28,11 +28,11 @@ public class HydrationMonitor {
     }
 
     
-
+    // By adding the instance to the static list, the static method logs the amount of water consumed.
     public static void logWaterIntake(HydrationMonitor waters) {
         water.add(waters);
     }
-
+    // Get all water intake logs list.
     public static ArrayList<HydrationMonitor> getWater() {
         return water;
     }
