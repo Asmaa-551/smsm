@@ -40,6 +40,7 @@ public class SetGoal {
         this.monthlyProteinGoal = monthlyProteinGoal;
     }
 
+    // Gives the user the option to create or modify objectives on a daily, weekly, or monthly basis.
     public void setUpdateGoals() {
         Scanner input = new Scanner(System.in);
         
@@ -99,6 +100,7 @@ public class SetGoal {
         }
     }
 
+    // Using the user's food, water, and exercise logs, this function determines if the user has reached their daily targets
     public void checkDailyGoals(ActivityManager manager, ArrayList<HydrationMonitor> waterIntakes, ArrayList<Dish> foodItems) {
         LocalDate today = LocalDate.now();
         int totalCalories = 0;

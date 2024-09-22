@@ -16,7 +16,7 @@ public class Performance {
         this.water = water;
         this.foodItems = foodItems;
     }
-
+    // Provides a weekly performance report using information from the previous 7 days
     public void generateWeeklyReport() {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime oneWeekAgo = now.minusDays(7);
@@ -28,7 +28,7 @@ public class Performance {
         System.out.println("Weekly Performance Report:");
         generateReport(weeklyWorkouts, weeklyFoodItems, weeklyWater);
     }
-    
+    // Provides a monthly performance report using information from the previous 30 days
     public void generateMonthlyReport() {
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime oneMonthAgo = now.minusDays(30);
@@ -41,6 +41,7 @@ public class Performance {
         generateReport(monthlyWorkouts, monthlyFoodItems, monthlyWater);
     }
 
+    // Sorts workouts according to the range of dates 
     private ArrayList<Workout> filterWorkoutsByDate(LocalDateTime startDateTime, LocalDateTime endDateTime) {
         ArrayList<Workout> filteredWorkouts = new ArrayList<>();
         
@@ -53,6 +54,7 @@ public class Performance {
         
         return filteredWorkouts; 
     }
+     // Sorts food items according to the date of ranges
 
     public ArrayList<Dish> filterFoodByDate(LocalDateTime startDateTime, LocalDateTime endDateTime) {
         ArrayList<Dish> filteredFoodItems = new ArrayList<>();
@@ -63,6 +65,7 @@ public class Performance {
         }
         return filteredFoodItems;
     }
+    // Sorts water intake according to the date of ranges
 
     public ArrayList<HydrationMonitor> filterWaterByDate(LocalDateTime startDateTime, LocalDateTime endDateTime) {
         ArrayList<HydrationMonitor> filteredWater = new ArrayList<>();
@@ -93,6 +96,7 @@ public class Performance {
     
         int runningCount = 0, cyclingCount = 0, swimmingCount = 0, walkingCount = 0, boxingCount = 0, weightliftingCount = 0;
     
+        // Loop through to get the required stats
         for (Workout workout : filteredWorkouts) {
             int calories = (int) workout.calculateCalories();
             totalCaloriesBurned += calories;
@@ -131,6 +135,7 @@ public class Performance {
             }
         }
         
+        // Calculations
         int totalFoodCalories = 0;
         double totalWaterIntake = 0;
         int totalProteinsConsumed = 0;

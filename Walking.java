@@ -31,6 +31,8 @@ public class Walking extends Workout implements WorkoutUpdater{
         double totalCalories = (getIntensity()-1) * getWeight() * getDuration();
         return totalCalories;
     }
+
+	// Updates different workout elements by implementing updateWorkout from the WorkoutUpdater interface
     @Override
     public void updateWorkout(String attribute, Object newValue) throws InvalidAttributeException {
 		switch (attribute.toLowerCase()) {

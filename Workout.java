@@ -65,6 +65,7 @@ public abstract class Workout {
 
 	public void updateWorkout(String attribute, Object value)throws InvalidAttributeException {}
 	
+	// Confirms that the workout has been logged by adding it to the WorkOutManager class and printing a message
     public void logWorkout() {
 		ActivityManager.addWorkout(this);
         System.out.println("Workout logged: " + getWorkoutDetails());

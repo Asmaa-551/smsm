@@ -10,6 +10,7 @@ public class Diet {
         this.water = new ArrayList<>();
     }
 
+    // add a new dish object to the list of food items 
     public void addFoodItem(Dish foodItem) {
         foodItems.add(foodItem);
         System.out.println("Food item logged: " + foodItem.getMealName() + ", " + foodItem.getCalories() + " calories.");
@@ -32,7 +33,7 @@ public class Diet {
     }
 
 
-
+    // It is to figure out how many calories are in each food item
     public int calculateTotalCalories() {
         int totalCalories = 0;
         for (Dish item : foodItems) {
