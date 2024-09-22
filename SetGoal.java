@@ -49,8 +49,8 @@ public class SetGoal {
         int choice = input.nextInt();
         try{
         switch (choice) {
-            case 1: // Daily Goals
-                dailyGoalStartTime = LocalDate.now().atStartOfDay(); // Set to midnight today
+            case 1:
+                dailyGoalStartTime = LocalDate.now().atStartOfDay();
                 System.out.println("Setting Daily Goals:");
                 System.out.print("Calories Burned: ");
                 dailyGoalCalories = input.nextInt();
@@ -63,7 +63,7 @@ public class SetGoal {
                 System.out.println("Daily goals updated successfully!");
                 break;
             
-            case 2: // Weekly Goals
+            case 2:
                 weeklyGoalStartTime = LocalDate.now().with(WeekFields.of(Locale.getDefault()).dayOfWeek(), 1).atStartOfDay(); // Set to start of the week
                 System.out.println("Setting Weekly Goals:");
                 System.out.print("Calories Burned: ");
@@ -77,7 +77,7 @@ public class SetGoal {
                 System.out.println("Weekly goals updated successfully!");
                 break;
             
-            case 3: // Monthly Goals
+            case 3:
                 monthlyGoalStartTime = LocalDate.now().withDayOfMonth(1).atStartOfDay(); // Set to start of the month
                 System.out.println("Setting Monthly Goals:");
                 System.out.print("Calories Burned: ");
