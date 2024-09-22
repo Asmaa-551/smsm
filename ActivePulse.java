@@ -48,6 +48,9 @@ public class ActivePulse {
 		do {
 			System.out.println("Your Choice (0, 1, 2, 3, 4, 5, 6, 7):");
 			choice = input.nextInt();
+			if(choice < 0 || choice > 6) {
+				System.out.println("Invalid Choice, Please Try Again.");
+			}
 		} while(choice > 6);
 		return choice;
 	}
@@ -63,10 +66,19 @@ public class ActivePulse {
 		// Gather common workout attributes
 		System.out.println("Enter duration (in minutes): ");
 		double duration = input.nextDouble();
+		if(duration <= 0) {
+            System.out.println("Invalid duration, please enter a positive number.");
+        }
 		System.out.println("Enter heart rate (in bpm): ");
 		int heartRate = input.nextInt();
+		if(heartRate<= 0) {
+            System.out.println("Invalid heart rate, please enter a positive number.");
+        }
 		System.out.println("Enter intensity (e.g., A, B, C): ");
 		char intensity = input.next().charAt(0);
+		if(intensity != 'A' && intensity != 'B' && intensity != 'C') {
+            System.out.println("Invalid intensity, please enter 'A', 'B', or 'C'.");
+        }
 	
 		switch (workoutType) {
 			case 1: // Walking
