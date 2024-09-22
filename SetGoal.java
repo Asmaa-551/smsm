@@ -1,220 +1,216 @@
-import java.util.Scanner;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.*;
+import java.time.*;
 import java.time.temporal.WeekFields;
-import java.util.Locale;
 
 public class SetGoal {
-	private int goalCaloriesBurned;
-    private boolean ReachGoalC;
-	private double durationGoal;
-    private boolean ReachGoalD;
-	private String goalType;
+    private int dailyGoalCalories;
+    private double dailyDurationGoal;
+    private double dailyWaterGoal;
+    private double dailyProteinGoal;
 
-    private double waterGoal;
-    private double proteinGoal;
-    
+    private int weeklyGoalCalories;
+    private double weeklyDurationGoal;
+    private double weeklyWaterGoal;
+    private double weeklyProteinGoal;
 
-	public SetGoal(int goalCaloriesBurned, double durationGoal, double waterGoal, double proteinGoal) {
-		this.goalCaloriesBurned = goalCaloriesBurned;
-		this.durationGoal = durationGoal;
-        this.waterGoal = waterGoal; 
-        this.proteinGoal = proteinGoal;	
-	}
+    private int monthlyGoalCalories;
+    private double monthlyDurationGoal;
+    private double monthlyWaterGoal;
+    private double monthlyProteinGoal;
+    private LocalDateTime dailyGoalStartTime;
+    private LocalDateTime weeklyGoalStartTime;
+    private LocalDateTime monthlyGoalStartTime;
 
-    public void setUpdategoals() {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Set or Update Fitness Goals:");
-        System.out.println("Choose goal type: 1- Daily  2- Weekly  3- Monthly");
+    public SetGoal() {}
 
-        int choice = input.nextInt();
-        switch (choice) {
-            case 1:
-                goalType = "Daily";
-                break;
-            case 2:
-                goalType = "Weekly";
-                break;
-            case 3:
-                goalType = "Monthly";
-                break;
-            default:
-                System.out.println("Invalid choice , Defaulting to Daily");
-                goalType = "Daily";
-                break;
-        }
-
-        System.out.println("Your goal type is set to: " + goalType);
+    public SetGoal(int dailyGoalCalories, double dailyDurationGoal, double dailyWaterGoal, double dailyProteinGoal,
+                   int weeklyGoalCalories, double weeklyDurationGoal, double weeklyWaterGoal, double weeklyProteinGoal,
+                   int monthlyGoalCalories, double monthlyDurationGoal, double monthlyWaterGoal, double monthlyProteinGoal) {
+        this.dailyGoalCalories = dailyGoalCalories;
+        this.dailyDurationGoal = dailyDurationGoal;
+        this.dailyWaterGoal = dailyWaterGoal;
+        this.dailyProteinGoal = dailyProteinGoal;
+        this.weeklyGoalCalories = weeklyGoalCalories;
+        this.weeklyDurationGoal = weeklyDurationGoal;
+        this.weeklyWaterGoal = weeklyWaterGoal;
+        this.weeklyProteinGoal = weeklyProteinGoal;
+        this.monthlyGoalCalories = monthlyGoalCalories;
+        this.monthlyDurationGoal = monthlyDurationGoal;
+        this.monthlyWaterGoal = monthlyWaterGoal;
+        this.monthlyProteinGoal = monthlyProteinGoal;
     }
 
-    public void checkGoals(WorkOutManager manager) {
+    public void setUpdateGoals() {
+        Scanner input = new Scanner(System.in);
+        
+        System.out.println("Set or Update Fitness Goals:");
+        System.out.println("Choose goal type: 1 - Daily, 2 - Weekly, 3 - Monthly");
+        
+        int choice = input.nextInt();
+        
+        switch (choice) {
+            case 1: // Daily Goals
+                dailyGoalStartTime = LocalDate.now().atStartOfDay(); // Set to midnight today
+                System.out.println("Setting Daily Goals:");
+                System.out.print("Calories Burned: ");
+                dailyGoalCalories = input.nextInt();
+                System.out.print("Workout Duration (minutes): ");
+                dailyDurationGoal = input.nextDouble();
+                System.out.print("Water Intake (liters): ");
+                dailyWaterGoal = input.nextDouble();
+                System.out.print("Protein Intake (grams): ");
+                dailyProteinGoal = input.nextDouble();
+                System.out.println("Daily goals updated successfully!");
+                break;
+            
+            case 2: // Weekly Goals
+                weeklyGoalStartTime = LocalDate.now().with(WeekFields.of(Locale.getDefault()).dayOfWeek(), 1).atStartOfDay(); // Set to start of the week
+                System.out.println("Setting Weekly Goals:");
+                System.out.print("Calories Burned: ");
+                weeklyGoalCalories = input.nextInt();
+                System.out.print("Workout Duration (minutes): ");
+                weeklyDurationGoal = input.nextDouble();
+                System.out.print("Water Intake (liters): ");
+                weeklyWaterGoal = input.nextDouble();
+                System.out.print("Protein Intake (grams): ");
+                weeklyProteinGoal = input.nextDouble();
+                System.out.println("Weekly goals updated successfully!");
+                break;
+            
+            case 3: // Monthly Goals
+                monthlyGoalStartTime = LocalDate.now().withDayOfMonth(1).atStartOfDay(); // Set to start of the month
+                System.out.println("Setting Monthly Goals:");
+                System.out.print("Calories Burned: ");
+                monthlyGoalCalories = input.nextInt();
+                System.out.print("Workout Duration (minutes): ");
+                monthlyDurationGoal = input.nextDouble();
+                System.out.print("Water Intake (liters): ");
+                monthlyWaterGoal = input.nextDouble();
+                System.out.print("Protein Intake (grams): ");
+                monthlyProteinGoal = input.nextDouble();
+                System.out.println("Monthly goals updated successfully!");
+                break;
+            
+            default:
+                System.out.println("Invalid choice. Please select 1, 2, or 3.");
+        }
+    }
+
+    public void checkDailyGoals(ActivityManager manager, ArrayList<HydrationMonitor> waterIntakes, ArrayList<Dish> foodItems) {
+        LocalDate today = LocalDate.now();
         int totalCalories = 0;
         double totalDuration = 0;
-
-        LocalDate today = LocalDate.now();
-
+        double totalWater = 0;
+        double totalProtein = 0;
+    
         for (Workout workout : manager.getWorkouts()) {
-            LocalDateTime workoutDateTime = workout.getDateTime();
-            LocalDate workoutDate = workoutDateTime.toLocalDate(); 
-
-            switch (goalType) {
-                case "Daily":
-                    if (workoutDate.equals(today)) {
-                        totalCalories += workout.calculateCalories();
-                        totalDuration += workout.getDuration();
-                    }
-                    break;
-
-                case "Weekly":
-                    WeekFields weekFields = WeekFields.of(Locale.getDefault());
-                    int currentWeek = today.get(weekFields.weekOfWeekBasedYear());
-                    int workoutWeek = workoutDate.get(weekFields.weekOfWeekBasedYear());
-
-                    if (workoutWeek == currentWeek) {
-                        totalCalories += workout.calculateCalories();
-                        totalDuration += workout.getDuration();
-                    }
-                    break;
-
-                case "Monthly":
-                    if (workoutDate.getMonth().equals(today.getMonth()) && workoutDate.getYear() == today.getYear()) {
-                        totalCalories += workout.calculateCalories();
-                        totalDuration += workout.getDuration();
-                    }
-                    break;
-
-                default:
-                    System.out.println("Invalid goal type");
+            LocalDate workoutDate = workout.getDateTime().toLocalDate();
+            if (workoutDate.equals(today)) {
+                totalCalories += workout.calculateCalories();
+                totalDuration += workout.getDuration();
             }
         }
-
-		if(totalCalories >= goalCaloriesBurned) {
-			ReachGoalC = true ;
-            System.out.println("Congratulations! You have burned " + totalCalories + " calories, reaching your goal of " + goalCaloriesBurned + " calories!");
-		}
-	    else{
-            int caloriesLeft = goalCaloriesBurned - totalCalories;
-			System.out.println("Keep going! You need " + caloriesLeft + " more calories to reach your goal of " + goalCaloriesBurned + " calories");
-			}
-        
-        if(totalDuration >= durationGoal) {
-                ReachGoalD = true ;
-                System.out.println("Great job! You've worked out for " + totalDuration + " minutes, reaching your goal of " + durationGoal + " minutes! ");
+    
+        for (HydrationMonitor water : waterIntakes) {
+            LocalDate waterDate = water.getIntakeDateTime().toLocalDate();
+            if (waterDate.equals(today)) {
+                totalWater += water.getWaterAmount();
+            }
         }
-         else{
-            double minutesLeft = durationGoal - totalDuration;
-            System.out.println("You're almost there! You need " + minutesLeft + " more minutes to reach your goal of " + durationGoal + " minutes ");
-             }
+    
+        for (Dish food : foodItems) {
+            LocalDate foodDate = food.getDateLogged().toLocalDate();
+            if (foodDate.equals(today)) {
+                totalProtein += food.getProteins();
             }
-
-            public void checkWaterGoals(Water[] waterIntakes) {
-                double totalWater = 0;
-                LocalDate today = LocalDate.now();
-        
-                for (Water water : waterIntakes) {
-                    LocalDateTime waterDateTime = water.getIntakeDateTime();
-                    LocalDate waterDate = waterDateTime.toLocalDate();
-        
-                    switch (goalType) {
-                        case "Daily":
-                            if (waterDate.equals(today)) {
-                                totalWater += water.getWaterAmount();
-                            }
-                            break;
-                        case "Weekly":
-                            WeekFields weekFields = WeekFields.of(Locale.getDefault());
-                            int currentWeek = today.get(weekFields.weekOfWeekBasedYear());
-                            int waterWeek = waterDate.get(weekFields.weekOfWeekBasedYear());
-        
-                            if (waterWeek == currentWeek) {
-                                totalWater += water.getWaterAmount();
-                            }
-                            break;
-                        case "Monthly":
-                            if (waterDate.getMonth().equals(today.getMonth()) && waterDate.getYear() == today.getYear()) {
-                                totalWater += water.getWaterAmount();
-                            }
-                            break;
-                    }
-                }
-        
-                if (totalWater >= waterGoal) {
-                    System.out.println("You have reached your water intake goal!");
-                } else {
-                    System.out.println("You need " + (waterGoal - totalWater) + " more liters of water to reach your goal.");
-                }
-            }
-
-            public void checkProteinGoals(FoodItem[] foodItems) {
-                double totalProtein = 0;
-                LocalDate today = LocalDate.now();
-        
-                for (FoodItem food : foodItems) {
-                    LocalDateTime foodDateTime = food.getDateLogged();
-                    LocalDate foodDate = foodDateTime.toLocalDate();
-        
-                    switch (goalType) {
-                        case "Daily":
-                            if (foodDate.equals(today)) {
-                                totalProtein += food.getProteins();
-                            }
-                            break;
-                        case "Weekly":
-                            WeekFields weekFields = WeekFields.of(Locale.getDefault());
-                            int currentWeek = today.get(weekFields.weekOfWeekBasedYear());
-                            int foodWeek = foodDate.get(weekFields.weekOfWeekBasedYear());
-        
-                            if (foodWeek == currentWeek) {
-                                totalProtein += food.getProteins();
-                            }
-                            break;
-                        case "Monthly":
-                            if (foodDate.getMonth().equals(today.getMonth()) && foodDate.getYear() == today.getYear()) {
-                                totalProtein += food.getProteins();
-                            }
-                            break;
-                    }
-                }
-        
-                if (totalProtein >= proteinGoal) {
-                    System.out.println("You have reached your protein intake goal!");
-                } else {
-                    System.out.println("You need " + (proteinGoal - totalProtein) + " more grams of protein to reach your goal.");
-                }
-            }
-		
-            public void updateGoal(WorkOutManager manager, int index, int newGoalCaloriesBurned, double newDurationGoal, double newWaterGoal, double newProteinGoal) {
-                if (index >= 0 && index < manager.getWorkouts().size()) {
-                    this.goalCaloriesBurned = newGoalCaloriesBurned;
-                    this.durationGoal = newDurationGoal;
-                    this.waterGoal = newWaterGoal;
-                    this.proteinGoal = newProteinGoal;
-            
-                    System.out.println("Calories Updated Goal: " + goalCaloriesBurned + " kcal");
-                    System.out.println("Duration Updated Goal: " + durationGoal + " minutes");
-                    System.out.println("Water Intake Goal Updated: " + waterGoal + " liters");
-                    System.out.println("Protein Intake Goal Updated: " + proteinGoal + " grams");
-                } else {
-                    System.out.println("Invalid workout index");
-                }
-            }
-            
-            
         }
-		
-	
+    
+        checkGoal("calories", totalCalories, dailyGoalCalories, dailyGoalStartTime, "daily"); 
+        checkGoal("workout duration", totalDuration, dailyDurationGoal, dailyGoalStartTime, "daily");
+        checkGoal("water intake", totalWater, dailyWaterGoal, dailyGoalStartTime, "daily");
+        checkGoal("protein intake", totalProtein, dailyProteinGoal, dailyGoalStartTime, "daily");
+    }
 
+    public void checkWeeklyGoals(ActivityManager manager, ArrayList<HydrationMonitor> waterIntakes, ArrayList<Dish> foodItems) {
+        LocalDate today = LocalDate.now();
+        LocalDate weekStart = today.with(WeekFields.of(Locale.getDefault()).dayOfWeek(), 1);
+    
+        int totalCalories = 0;
+        double totalDuration = 0;
+        double totalWater = 0;
+        double totalProtein = 0;
+    
+        for (Workout workout : manager.getWorkouts()) {
+            LocalDate workoutDate = workout.getDateTime().toLocalDate();
+            if (!workoutDate.isBefore(weekStart)) {
+                totalCalories += workout.calculateCalories();
+                totalDuration += workout.getDuration();
+            }
+        }
+    
+        for (HydrationMonitor water : waterIntakes) {
+            LocalDate waterDate = water.getIntakeDateTime().toLocalDate();
+            if (!waterDate.isBefore(weekStart)) {
+                totalWater += water.getWaterAmount();
+            }
+        }
+    
+        for (Dish food : foodItems) {
+            LocalDate foodDate = food.getDateLogged().toLocalDate();
+            if (!foodDate.isBefore(weekStart)) {
+                totalProtein += food.getProteins();
+            }
+        }
+    
+        checkGoal("calories", totalCalories, weeklyGoalCalories, weeklyGoalStartTime, "weekly");
+        checkGoal("workout duration", totalDuration, weeklyDurationGoal, weeklyGoalStartTime, "weekly");
+        checkGoal("water intake", totalWater, weeklyWaterGoal, weeklyGoalStartTime, "weekly");
+        checkGoal("protein intake", totalProtein, weeklyProteinGoal, weeklyGoalStartTime, "weekly");
+    }
 
-		
-		
-		
-	
-	
-	
+    public void checkMonthlyGoals(ActivityManager manager, ArrayList<HydrationMonitor> waterIntakes, ArrayList<Dish> foodItems) {
+        LocalDate today = LocalDate.now();
+        LocalDate monthStart = today.withDayOfMonth(1);
+    
+        int totalCalories = 0;
+        double totalDuration = 0;
+        double totalWater = 0;
+        double totalProtein = 0;
+    
+        for (Workout workout : manager.getWorkouts()) {
+            LocalDate workoutDate = workout.getDateTime().toLocalDate();
+            if (!workoutDate.isBefore(monthStart)) {
+                totalCalories += workout.calculateCalories();
+                totalDuration += workout.getDuration();
+            }
+        }
+    
+        for (HydrationMonitor water : waterIntakes) {
+            LocalDate waterDate = water.getIntakeDateTime().toLocalDate();
+            if (!waterDate.isBefore(monthStart)) {
+                totalWater += water.getWaterAmount();
+            }
+        }
+    
+        for (Dish food : foodItems) {
+            LocalDate foodDate = food.getDateLogged().toLocalDate();
+            if (!foodDate.isBefore(monthStart)) {
+                totalProtein += food.getProteins();
+            }
+        }
+    
+        checkGoal("calories", totalCalories, monthlyGoalCalories, monthlyGoalStartTime, "monthly");
+        checkGoal("workout duration", totalDuration, monthlyDurationGoal, monthlyGoalStartTime, "monthly");
+        checkGoal("water intake", totalWater, monthlyWaterGoal, monthlyGoalStartTime, "monthly");
+        checkGoal("protein intake", totalProtein, monthlyProteinGoal, monthlyGoalStartTime, "monthly");
+    }
 
-	
-	
-	
-
-
-
+    public void checkGoal(String goalType, double currentValue, double goalValue, LocalDateTime startTime, String period) {
+        if (currentValue >= goalValue) {
+            System.out.println("Congratulations! You've reached your " + goalType + " goal of " + goalValue + ".");
+        } else {
+            double remaining = goalValue - currentValue;
+            System.out.println("You need " + remaining + " more " + goalType + " to reach your goal.");
+        }
+    }
+}

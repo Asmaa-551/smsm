@@ -1,12 +1,13 @@
-import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 
 public class ActivePulse {
 
-	private static WorkOutManager workoutManager = new WorkOutManager();
+	private static ActivityManager workoutManager = new ActivityManager();
 	private static Diet diet = new Diet();
+	private static SetGoal goal = new SetGoal();
+
 
 	public static void main(String[] args) {
 		int userChoice;
@@ -15,31 +16,29 @@ public class ActivePulse {
 			userChoice = UserMenuChoice();
 			switch (userChoice) {
 				case 1: LogNewWorkout(); break; 	
-				case 2: UpdateWorkout(); break;	
-				case 3: SetUpdateFitnessGoals(); break;	
-				case 4: ViewProgress(); break;		
-				case 5: GeneratePerformanceReports(); break;	
-				case 6: NewExtraFunctionality(); break;	
+				case 2: logFoodOrWater(); break;	
+				case 3: UpdateWorkout(); break;	
+				case 4: SetUpdateFitnessGoals(); break;		
+				case 5: ViewProgress(); break;	
+				case 6: logFoodOrWater(); break;
+				case 7: GeneratePerformanceReports(); break;	
 
 				default:  System.out.println("Thank You for Using CSC301's ActivePulse (A Personal Fitness Tracker App), Have a Nice Day.");
 			}
 		}while (userChoice != 0);
 	}
 	
-	private static void NewExtraFunctionality() {
-		throw new UnsupportedOperationException("Unimplemented method 'NewExtraFunctionality'");
-	}
-
 	public static void DislayMenu() {
 		System.out.println("------------------------------------------------------------");
 		System.out.println("Personal Fitness Tracker System (ActivePulse, Fall 24-25)");
 		System.out.println("------------------------------------------------------------");
 		System.out.println("1. Log a new workout (Running, Cycling, Weightlifting, Swimming, ...)");
-		System.out.println("2. Update workout details (duration, distance, calories, etc.)");
-		System.out.println("3. Set or update fitness goals.");
-		System.out.println("4. View progress toward goals.");
-		System.out.println("5. Generate performance reports (weekly, monthly, etc.)");
+		System.out.println("2. Log nutritional intake (meals and water).");
+		System.out.println("3. Update workout details (duration, distance, calories, etc.)");
+		System.out.println("4. Set or update fitness goals.");
+		System.out.println("5. View progress toward goals.");
 		System.out.println("6. Log nutritional intake (meals and water).");
+		System.out.println("7. Generate performance reports (weekly, monthly, etc.)");
 		System.out.println("0. Exit");
 		System.out.println("------------------------------------------------------------");
 	}
@@ -48,7 +47,7 @@ public class ActivePulse {
 		Scanner input = new Scanner(System.in);
 		int choice;
 		do {
-			System.out.println("Your Choice (0, 1, 2, 3, 4, 5, 6):");
+			System.out.println("Your Choice (0, 1, 2, 3, 4, 5, 6, 7):");
 			choice = input.nextInt();
 		} while(choice > 6);
 		return choice;
@@ -291,11 +290,35 @@ public class ActivePulse {
 	
 
 	public static void SetUpdateFitnessGoals(){
-		// To be completed. Feel free to change the input parameters.  
+		goal.setUpdateGoals();
+
 	}
 
-	public static void ViewProgress(){
-		// To be completed. Feel free to change the input parameters. 
+	public static void ViewProgress() {
+		Scanner input = new Scanner(System.in);
+		
+		// Ask the user which goals they want to check
+		System.out.println("Which goals would you like to check?");
+		System.out.println("1 - Daily Goals");
+		System.out.println("2 - Weekly Goals");
+		System.out.println("3 - Monthly Goals");
+	
+		int choice = input.nextInt();
+			
+		switch (choice) {
+			case 1:
+				goal.checkDailyGoals(workoutManager, diet.getwater(), diet.getFoodItem());
+				break;
+			case 2:
+				goal.checkWeeklyGoals(workoutManager, diet.getwater(), diet.getFoodItem());
+				break;
+			case 3:
+				goal.checkMonthlyGoals(workoutManager, diet.getwater(), diet.getFoodItem());
+				break;
+
+			default:
+				System.out.println("Invalid choice. Please select a valid option.");
+		}
 	}
 	
 	public static void GeneratePerformanceReports() {
@@ -303,7 +326,7 @@ public class ActivePulse {
         System.out.println("Choose report type: 1. Weekly 2. Monthly");
         int reportType = input.nextInt();
 
-        Performance performance = new Performance(workoutManager.getWorkouts());
+        Performance performance = new Performance(workoutManager.getWorkouts(), diet.getwater(), diet.getFoodItem());
 
         if (reportType == 1) {
             performance.generateWeeklyReport();
@@ -319,7 +342,7 @@ public class ActivePulse {
 	
 		System.out.println("Choose an option: 1. Log Meal 2. Log Water");
 		int choice = input.nextInt();
-	
+		try {
 		if (choice == 1) {
 			System.out.println("Enter meal name: ");
 			String mealName = input.next();
@@ -328,16 +351,19 @@ public class ActivePulse {
 			System.out.println("Enter protein amount: ");
 			double proteins = input.nextDouble();
 	
-			FoodItem foodItem = new FoodItem(mealName, calories, proteins);
+			Dish foodItem = new Dish(mealName, calories, proteins);
 			diet.addFoodItem(foodItem);
 		} else if (choice == 2) {
 			System.out.println("Enter water amount (in liters): ");
 			double waterAmount = input.nextDouble();
-	
-			Water waterEntry = new Water(waterAmount);
+			HydrationMonitor waterEntry = new HydrationMonitor(waterAmount);
 			diet.addWater(waterEntry);
 		} else {
-			System.out.println("Invalid choice. Please select 1 or 2.");
+			throw new InvalidChoiceException("Invalid choice. Please select 1 or 2.");
+		}
+	}
+	catch (InvalidChoiceException e) {
+		System.out.println(e.getMessage());
 		}
 	}
 

@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Diet {
-    private ArrayList<FoodItem> foodItems;
-    private ArrayList<Water> water;
+    private ArrayList<Dish> foodItems;
+    private ArrayList<HydrationMonitor> water;
 
 
     public Diet() {
@@ -10,21 +10,32 @@ public class Diet {
         this.water = new ArrayList<>();
     }
 
-    public void addFoodItem(FoodItem foodItem) {
+    public void addFoodItem(Dish foodItem) {
         foodItems.add(foodItem);
         System.out.println("Food item logged: " + foodItem.getMealName() + ", " + foodItem.getCalories() + " calories.");
     }
 
-    public void addWater(Water waterEntry) {
+    public void addWater(HydrationMonitor waterEntry) {
         water.add(waterEntry);
         System.out.println("Water intake logged: " + waterEntry.getWaterAmount() + " liters.");
     }
     
 
+    public ArrayList<Dish> getFoodItem()
+    {
+        return foodItems;
+    }
+
+    public ArrayList<HydrationMonitor> getwater()
+    {
+        return water;
+    }
+
+
 
     public int calculateTotalCalories() {
         int totalCalories = 0;
-        for (FoodItem item : foodItems) {
+        for (Dish item : foodItems) {
             totalCalories += item.getCalories();
         }
         return totalCalories;
@@ -32,7 +43,7 @@ public class Diet {
 
     public double calculateTotalProteins() {
         double totalProteins = 0;
-        for (FoodItem item : foodItems) {
+        for (Dish item : foodItems) {
             totalProteins += item.getProteins();
         }
         return totalProteins;
