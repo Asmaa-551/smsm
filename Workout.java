@@ -64,6 +64,7 @@ public abstract class Workout {
 	       }
 	}
 	
+	// Confirms that the workout has been logged by adding it to the WorkOutManager class and printing a message
     public void logWorkout() {
 		WorkOutManager.addWorkout(this);
         System.out.println("Boxing workout logged: ");

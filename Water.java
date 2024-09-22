@@ -28,7 +28,7 @@ public class Water {
     }
 
     
-
+    // A water object is added to the list
     public static void logWaterIntake(Water waters) {
         water.add(waters);
         System.out.println("Workout added at " + waters.getIntakeDateTime());
