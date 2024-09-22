@@ -147,17 +147,14 @@ public class ActivePulse {
         System.out.println((i + 1) + ". " + workouts.get(i).getWorkoutDetails());
     }
 
-    // Get the workout choice from the user
     System.out.println("Enter the number of the workout you want to update: ");
     int workoutChoice = input.nextInt();
 
-    // Validate the workout choice
     if (workoutChoice < 1 || workoutChoice > workouts.size()) {
         System.out.println("Invalid workout number. Please try again.");
         return;
     }
 
-    // Get the selected workout
     Workout selectedWorkout = workouts.get(workoutChoice - 1);
 
     System.out.println("Select an attribute to update:");
@@ -165,7 +162,6 @@ public class ActivePulse {
     System.out.println("2. Heart Rate");
     System.out.println("3. Intensity");
 
-    // Add workout-specific attributes
     if (selectedWorkout instanceof Swimming) {
         System.out.println("4. Underwater Depth");
         System.out.println("5. Swimming Style");
@@ -188,11 +184,9 @@ public class ActivePulse {
         System.out.println("5. Number of Sets");
     }
 
-    // Get the attribute choice from the user
     int attributeChoice = input.nextInt();
     Object newValue = null;
 
-    // Update the selected attribute
     switch (attributeChoice) {
         case 1: // Duration
             System.out.println("Enter new duration (in minutes): ");
@@ -291,13 +285,11 @@ public class ActivePulse {
 
 	public static void SetUpdateFitnessGoals(){
 		goal.setUpdateGoals();
-
 	}
 
 	public static void ViewProgress() {
 		Scanner input = new Scanner(System.in);
 		
-		// Ask the user which goals they want to check
 		System.out.println("Which goals would you like to check?");
 		System.out.println("1 - Daily Goals");
 		System.out.println("2 - Weekly Goals");
