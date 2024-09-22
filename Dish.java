@@ -1,22 +1,22 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class FoodItem {
+public class Dish {
     private String mealName;
     private int calories;
     private double proteins;
     private LocalDateTime dateLogged;
-    private static ArrayList<FoodItem> FoodItem;
+    private static ArrayList<Dish> FoodItem;
 
 
-    public FoodItem(String mealName, int calories, double proteins) {
+    public Dish(String mealName, int calories, double proteins) {
         this.mealName = mealName;
         this.calories = calories;
         this.proteins = proteins;
         this.dateLogged = LocalDateTime.now(); 
     }
 
-    public FoodItem() {
+    public Dish() {
         FoodItem = new ArrayList<>();
     }
 
@@ -48,12 +48,12 @@ public class FoodItem {
         return proteins;
     }
 
-    public static void logWaterIntake(FoodItem foodItems) {
+    public static void logWaterIntake(Dish foodItems) {
         FoodItem.add(foodItems);
         System.out.println("Workout added at " + foodItems.getDateLogged());
     }
 
-    public static ArrayList<FoodItem> getFoodItems() {
+    public static ArrayList<Dish> getFoodItems() {
         return FoodItem;
     }
 

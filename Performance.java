@@ -4,14 +4,14 @@ import java.util.List;
 
 public class Performance {
     private List<Workout> workouts;
-    private List<Water> water;
-    private List<FoodItem> foodItems;
+    private List<HydrationMonitor> water;
+    private List<Dish> foodItems;
 
 
     public Performance(ArrayList<Workout> workouts) {
         this.workouts = workouts;
     }
-    public Performance(List<Workout> workouts, List<Water> water, List<FoodItem> foodItems) {
+    public Performance(List<Workout> workouts, List<HydrationMonitor> water, List<Dish> foodItems) {
         this.workouts = workouts;
         this.water = water;
         this.foodItems = foodItems;
@@ -22,8 +22,8 @@ public class Performance {
         LocalDateTime oneWeekAgo = now.minusDays(7);
     
         ArrayList<Workout> weeklyWorkouts = filterWorkoutsByDate(oneWeekAgo, now);
-        ArrayList<FoodItem> weeklyFoodItems = filterFoodByDate(oneWeekAgo, now);
-        ArrayList<Water> weeklyWater = filterWaterByDate(oneWeekAgo, now);
+        ArrayList<Dish> weeklyFoodItems = filterFoodByDate(oneWeekAgo, now);
+        ArrayList<HydrationMonitor> weeklyWater = filterWaterByDate(oneWeekAgo, now);
     
         System.out.println("Weekly Performance Report:");
         generateReport(weeklyWorkouts, weeklyFoodItems, weeklyWater);
@@ -34,8 +34,8 @@ public class Performance {
         LocalDateTime oneMonthAgo = now.minusDays(30);
     
         ArrayList<Workout> monthlyWorkouts = filterWorkoutsByDate(oneMonthAgo, now);
-        ArrayList<FoodItem> monthlyFoodItems = filterFoodByDate(oneMonthAgo, now);
-        ArrayList<Water> monthlyWater = filterWaterByDate(oneMonthAgo, now);
+        ArrayList<Dish> monthlyFoodItems = filterFoodByDate(oneMonthAgo, now);
+        ArrayList<HydrationMonitor> monthlyWater = filterWaterByDate(oneMonthAgo, now);
     
         System.out.println("Monthly Performance Report:");
         generateReport(monthlyWorkouts, monthlyFoodItems, monthlyWater);
@@ -54,22 +54,22 @@ public class Performance {
         
         return filteredWorkouts; 
     }
-
      // Sorts food items according to the date of ranges
-    public ArrayList<FoodItem> filterFoodByDate(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        ArrayList<FoodItem> filteredFoodItems = new ArrayList<>();
-        for (FoodItem item : foodItems) {
+
+    public ArrayList<Dish> filterFoodByDate(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        ArrayList<Dish> filteredFoodItems = new ArrayList<>();
+        for (Dish item : foodItems) {
             if (!item.getDateLogged().isBefore(startDateTime) && !item.getDateLogged().isAfter(endDateTime)) {
                 filteredFoodItems.add(item);
             }
         }
         return filteredFoodItems;
     }
-
     // Sorts water intake according to the date of ranges
-    public ArrayList<Water> filterWaterByDate(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        ArrayList<Water> filteredWater = new ArrayList<>();
-        for (Water waterEntry : water) {
+
+    public ArrayList<HydrationMonitor> filterWaterByDate(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        ArrayList<HydrationMonitor> filteredWater = new ArrayList<>();
+        for (HydrationMonitor waterEntry : water) {
             if (!waterEntry.getIntakeDateTime().isBefore(startDateTime) && !waterEntry.getIntakeDateTime().isAfter(endDateTime)) {
                 filteredWater.add(waterEntry);
             }
@@ -77,7 +77,7 @@ public class Performance {
         return filteredWater;
     }
 
-    public void generateReport(ArrayList<Workout> filteredWorkouts, ArrayList<FoodItem> filteredFoodItems, ArrayList<Water> filteredWater) {
+    public void generateReport(ArrayList<Workout> filteredWorkouts, ArrayList<Dish> filteredFoodItems, ArrayList<HydrationMonitor> filteredWater) {
         int totalCaloriesBurned = 0;
         double totalDuration = 0;
     
@@ -141,13 +141,13 @@ public class Performance {
         double totalWaterIntake = 0;
         int totalProteinsConsumed = 0;
     
-        for (FoodItem item : filteredFoodItems) {
+        for (Dish item : filteredFoodItems) {
             totalFoodCalories += item.getCalories();
             totalProteinsConsumed += item.getProteins();
 
         }
     
-        for (Water waterEntry : filteredWater) {
+        for (HydrationMonitor waterEntry : filteredWater) {
             totalWaterIntake += waterEntry.getWaterAmount();
         }
     

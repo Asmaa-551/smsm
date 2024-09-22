@@ -63,7 +63,7 @@ public class Weightlifting extends Workout implements WorkoutUpdater{
 
     @Override
     public String getWorkoutDetails() {
-        return "Total Weight Lifted: " + getTotalWeightLifted() + ", Number Of Sets: " + getNumberOfSets();
+        return super.getWorkoutDetails()+ "Total Weight Lifted: " + getTotalWeightLifted() + ", Number Of Sets: " + getNumberOfSets();
     }
 	
 }

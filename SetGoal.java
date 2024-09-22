@@ -96,7 +96,7 @@ public class SetGoal {
         }
     }
 
-    public void checkDailyGoals(WorkOutManager manager, ArrayList<Water> waterIntakes, ArrayList<FoodItem> foodItems) {
+    public void checkDailyGoals(ActivityManager manager, ArrayList<HydrationMonitor> waterIntakes, ArrayList<Dish> foodItems) {
         LocalDate today = LocalDate.now();
         int totalCalories = 0;
         double totalDuration = 0;
@@ -111,14 +111,14 @@ public class SetGoal {
             }
         }
     
-        for (Water water : waterIntakes) {
+        for (HydrationMonitor water : waterIntakes) {
             LocalDate waterDate = water.getIntakeDateTime().toLocalDate();
             if (waterDate.equals(today)) {
                 totalWater += water.getWaterAmount();
             }
         }
     
-        for (FoodItem food : foodItems) {
+        for (Dish food : foodItems) {
             LocalDate foodDate = food.getDateLogged().toLocalDate();
             if (foodDate.equals(today)) {
                 totalProtein += food.getProteins();
@@ -131,7 +131,7 @@ public class SetGoal {
         checkGoal("protein intake", totalProtein, dailyProteinGoal, dailyGoalStartTime, "daily");
     }
 
-    public void checkWeeklyGoals(WorkOutManager manager, ArrayList<Water> waterIntakes, ArrayList<FoodItem> foodItems) {
+    public void checkWeeklyGoals(ActivityManager manager, ArrayList<HydrationMonitor> waterIntakes, ArrayList<Dish> foodItems) {
         LocalDate today = LocalDate.now();
         LocalDate weekStart = today.with(WeekFields.of(Locale.getDefault()).dayOfWeek(), 1);
     
@@ -148,14 +148,14 @@ public class SetGoal {
             }
         }
     
-        for (Water water : waterIntakes) {
+        for (HydrationMonitor water : waterIntakes) {
             LocalDate waterDate = water.getIntakeDateTime().toLocalDate();
             if (!waterDate.isBefore(weekStart)) {
                 totalWater += water.getWaterAmount();
             }
         }
     
-        for (FoodItem food : foodItems) {
+        for (Dish food : foodItems) {
             LocalDate foodDate = food.getDateLogged().toLocalDate();
             if (!foodDate.isBefore(weekStart)) {
                 totalProtein += food.getProteins();
@@ -168,7 +168,7 @@ public class SetGoal {
         checkGoal("protein intake", totalProtein, weeklyProteinGoal, weeklyGoalStartTime, "weekly");
     }
 
-    public void checkMonthlyGoals(WorkOutManager manager, ArrayList<Water> waterIntakes, ArrayList<FoodItem> foodItems) {
+    public void checkMonthlyGoals(ActivityManager manager, ArrayList<HydrationMonitor> waterIntakes, ArrayList<Dish> foodItems) {
         LocalDate today = LocalDate.now();
         LocalDate monthStart = today.withDayOfMonth(1);
     
@@ -185,14 +185,14 @@ public class SetGoal {
             }
         }
     
-        for (Water water : waterIntakes) {
+        for (HydrationMonitor water : waterIntakes) {
             LocalDate waterDate = water.getIntakeDateTime().toLocalDate();
             if (!waterDate.isBefore(monthStart)) {
                 totalWater += water.getWaterAmount();
             }
         }
     
-        for (FoodItem food : foodItems) {
+        for (Dish food : foodItems) {
             LocalDate foodDate = food.getDateLogged().toLocalDate();
             if (!foodDate.isBefore(monthStart)) {
                 totalProtein += food.getProteins();

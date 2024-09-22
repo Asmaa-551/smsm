@@ -1,16 +1,16 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-public class Water {
+public class HydrationMonitor {
     private double waterAmount;  
     private LocalDateTime intakeDateTime;
-    private static ArrayList<Water> water;
+    private static ArrayList<HydrationMonitor> water;
 
 
-    public Water() {
+    public HydrationMonitor() {
         water = new ArrayList<>();
     }
 
-    public Water(double waterAmount) {
+    public HydrationMonitor(double waterAmount) {
         this.waterAmount = waterAmount;
         this.intakeDateTime = LocalDateTime.now();
     }
@@ -28,13 +28,13 @@ public class Water {
     }
 
     
-    // A water object is added to the list
-    public static void logWaterIntake(Water waters) {
+
+    public static void logWaterIntake(HydrationMonitor waters) {
         water.add(waters);
         System.out.println("Workout added at " + waters.getIntakeDateTime());
     }
 
-    public static ArrayList<Water> getWater() {
+    public static ArrayList<HydrationMonitor> getWater() {
         return water;
     }
 }

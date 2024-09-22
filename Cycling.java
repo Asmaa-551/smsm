@@ -43,7 +43,7 @@ public class Cycling extends Workout implements WorkoutUpdater{
     @Override
     public double calculateCalories() {
     	
-        double caloriesPerMinute = (cyclingPower * 0.15) + (cyclingSpeed * 0.7); 
+        double caloriesPerMinute = (cyclingPower * 0.06) + (cyclingSpeed * 0.2); 
        
         double totalCalories = caloriesPerMinute * getDuration();
 
@@ -82,6 +82,6 @@ public class Cycling extends Workout implements WorkoutUpdater{
 
     @Override
     public String getWorkoutDetails() {
-        return "Cycling Power: " + getCyclingPower() + ", Cycling Speed: " + getCyclingSpeed() + ", Cycling Distance: " + getCyclingDistance();
+        return super.getWorkoutDetails()+ "Cycling Power: " + getCyclingPower() + ", Cycling Speed: " + getCyclingSpeed() + ", Cycling Distance: " + getCyclingDistance();
     }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ActivePulse {
 
-	private static WorkOutManager workoutManager = new WorkOutManager();
+	private static ActivityManager workoutManager = new ActivityManager();
 	private static Diet diet = new Diet();
 	private static SetGoal goal = new SetGoal();
 
@@ -20,7 +20,8 @@ public class ActivePulse {
 				case 3: UpdateWorkout(); break;	
 				case 4: SetUpdateFitnessGoals(); break;		
 				case 5: ViewProgress(); break;	
-				case 6: GeneratePerformanceReports(); break;	
+				case 6: logFoodOrWater(); break;
+				case 7: GeneratePerformanceReports(); break;	
 
 				default:  System.out.println("Thank You for Using CSC301's ActivePulse (A Personal Fitness Tracker App), Have a Nice Day.");
 			}
@@ -36,7 +37,8 @@ public class ActivePulse {
 		System.out.println("3. Update workout details (duration, distance, calories, etc.)");
 		System.out.println("4. Set or update fitness goals.");
 		System.out.println("5. View progress toward goals.");
-		System.out.println("6. Generate performance reports (weekly, monthly, etc.)");
+		System.out.println("6. Log nutritional intake (meals and water).");
+		System.out.println("7. Generate performance reports (weekly, monthly, etc.)");
 		System.out.println("0. Exit");
 		System.out.println("------------------------------------------------------------");
 	}
@@ -45,7 +47,7 @@ public class ActivePulse {
 		Scanner input = new Scanner(System.in);
 		int choice;
 		do {
-			System.out.println("Your Choice (0, 1, 2, 3, 4, 5, 6):");
+			System.out.println("Your Choice (0, 1, 2, 3, 4, 5, 6, 7):");
 			choice = input.nextInt();
 		} while(choice > 6);
 		return choice;
@@ -340,7 +342,7 @@ public class ActivePulse {
 	
 		System.out.println("Choose an option: 1. Log Meal 2. Log Water");
 		int choice = input.nextInt();
-	
+		try {
 		if (choice == 1) {
 			System.out.println("Enter meal name: ");
 			String mealName = input.next();
@@ -349,16 +351,19 @@ public class ActivePulse {
 			System.out.println("Enter protein amount: ");
 			double proteins = input.nextDouble();
 	
-			FoodItem foodItem = new FoodItem(mealName, calories, proteins);
+			Dish foodItem = new Dish(mealName, calories, proteins);
 			diet.addFoodItem(foodItem);
 		} else if (choice == 2) {
 			System.out.println("Enter water amount (in liters): ");
 			double waterAmount = input.nextDouble();
-	
-			Water waterEntry = new Water(waterAmount);
+			HydrationMonitor waterEntry = new HydrationMonitor(waterAmount);
 			diet.addWater(waterEntry);
 		} else {
-			System.out.println("Invalid choice. Please select 1 or 2.");
+			throw new InvalidChoiceException("Invalid choice. Please select 1 or 2.");
+		}
+	}
+	catch (InvalidChoiceException e) {
+		System.out.println(e.getMessage());
 		}
 	}
 

@@ -54,7 +54,7 @@ public class Running extends Workout implements WorkoutUpdater{
 
     @Override
     public String getWorkoutDetails() {
-        return "Speed: " + getSpeed() + ", Distance: " + getDistance();
+        return super.getWorkoutDetails()+ "Speed: " + getSpeed() + ", Distance: " + getDistance();
     }
 
 }

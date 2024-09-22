@@ -59,7 +59,7 @@ public class Boxing extends Workout implements WorkoutUpdater{
 
     @Override
     public String getWorkoutDetails() {
-        return "Punches: " + getPunches() + ", Rounds: " + getRounds();
+        return super.getWorkoutDetails()+ "Punches: " + getPunches() + ", Rounds: " + getRounds();
     }
 	
 }

@@ -65,7 +65,7 @@ public abstract class Workout {
 	
 	// Confirms that the workout has been logged by adding it to the WorkOutManager class and printing a message
     public void logWorkout() {
-		WorkOutManager.addWorkout(this);
+		ActivityManager.addWorkout(this);
         System.out.println("Workout logged: " + getWorkoutDetails());
     }
 
@@ -74,10 +74,8 @@ public abstract class Workout {
 		return "Workout [duration=" + duration + ", caloriesBurned=" + caloriesBurned
 				+ ", heartRate=" + heartRate + "Intensity Level = " + intensity + "Date = " + dateTime + "]";
 	}
-
-    public String getWorkoutDetails() {
-        return "Duration: " + getDuration();
+	public String getWorkoutDetails() {
+        return "Workout : duration=" + duration + ", caloriesBurned=" + caloriesBurned
+				+ ", heartRate=" + heartRate + "Intensity Level = " + intensity + "Date = " + dateTime;
     }
-
-	
 }
