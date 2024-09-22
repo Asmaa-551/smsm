@@ -47,7 +47,7 @@ public class SetGoal {
         System.out.println("Choose goal type: 1 - Daily, 2 - Weekly, 3 - Monthly");
         
         int choice = input.nextInt();
-        
+        try{
         switch (choice) {
             case 1: // Daily Goals
                 dailyGoalStartTime = LocalDate.now().atStartOfDay(); // Set to midnight today
@@ -92,7 +92,10 @@ public class SetGoal {
                 break;
             
             default:
-                System.out.println("Invalid choice. Please select 1, 2, or 3.");
+                throw new InvalidChoiceException("Invalid choice. Please select 1, 2, or 3.");
+        }
+        } catch (InvalidChoiceException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -162,10 +165,10 @@ public class SetGoal {
             }
         }
     
-        checkGoal("calories", totalCalories, weeklyGoalCalories, weeklyGoalStartTime, "weekly");
-        checkGoal("workout duration", totalDuration, weeklyDurationGoal, weeklyGoalStartTime, "weekly");
-        checkGoal("water intake", totalWater, weeklyWaterGoal, weeklyGoalStartTime, "weekly");
-        checkGoal("protein intake", totalProtein, weeklyProteinGoal, weeklyGoalStartTime, "weekly");
+        checkGoal("Calories", totalCalories, weeklyGoalCalories, weeklyGoalStartTime, "weekly");
+        checkGoal("Workout duration", totalDuration, weeklyDurationGoal, weeklyGoalStartTime, "weekly");
+        checkGoal("Water intake", totalWater, weeklyWaterGoal, weeklyGoalStartTime, "weekly");
+        checkGoal("Protein intake", totalProtein, weeklyProteinGoal, weeklyGoalStartTime, "weekly");
     }
 
     public void checkMonthlyGoals(ActivityManager manager, ArrayList<HydrationMonitor> waterIntakes, ArrayList<Dish> foodItems) {

@@ -281,7 +281,7 @@ public class ActivePulse {
             break;
 
         default:
-            System.out.println("Invalid attribute choice.");
+		
             break;
     }
 
@@ -304,7 +304,7 @@ public class ActivePulse {
 		System.out.println("3 - Monthly Goals");
 	
 		int choice = input.nextInt();
-			
+		try {	
 		switch (choice) {
 			case 1:
 				goal.checkDailyGoals(workoutManager, diet.getwater(), diet.getFoodItem());
@@ -317,8 +317,12 @@ public class ActivePulse {
 				break;
 
 			default:
-				System.out.println("Invalid choice. Please select a valid option.");
+			    throw new InvalidChoiceException("Invalid choice. Please select 1 or 2 or 3");
 		}
+	}
+	catch (InvalidChoiceException e) {
+		System.out.println(e.getMessage());
+	}
 	}
 	
 	public static void GeneratePerformanceReports() {
@@ -327,14 +331,18 @@ public class ActivePulse {
         int reportType = input.nextInt();
 
         Performance performance = new Performance(workoutManager.getWorkouts(), diet.getwater(), diet.getFoodItem());
-
+		try{
         if (reportType == 1) {
             performance.generateWeeklyReport();
         } else if (reportType == 2) {
             performance.generateMonthlyReport();
         } else {
-            System.out.println("Invalid report type selected.");
+            throw new InvalidChoiceException("Invalid report type selected.");
         }
+	}
+	catch (InvalidChoiceException e) {
+		System.out.println(e.getMessage());
+		}
     }
 
 	public static void logFoodOrWater() {
