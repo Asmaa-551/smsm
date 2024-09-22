@@ -298,15 +298,33 @@ public class ActivePulse {
 			System.out.println("Enter meal name: ");
 			String mealName = input.next();
 			System.out.println("Enter calories: ");
-			int calories = input.nextInt();
+			int calories;
+			do {
+                calories = input.nextInt();
+                if (calories < 0) {
+                    System.out.println("Calories cannot be negative. Please enter a positive value.");
+                }
+            } while (calories < 0);
 			System.out.println("Enter protein amount: ");
-			double proteins = input.nextDouble();
+			double proteins;
+			do {
+                proteins = input.nextDouble();
+                if (proteins < 0) {
+                    System.out.println("Protein amount cannot be negative. Please enter a positive value.");
+                }
+            } while (proteins < 0);
 	
 			Dish foodItem = new Dish(mealName, calories, proteins);
 			diet.addFoodItem(foodItem);
 		} else if (choice == 2) {
 			System.out.println("Enter water amount (in liters): ");
-			double waterAmount = input.nextDouble();
+			double waterAmount ;
+			do{
+			waterAmount = input.nextDouble();
+			if (waterAmount < 0) {
+				System.out.println("Water amount cannot be negative. Please enter a positive value.");
+			}
+		} while (waterAmount < 0);
 			HydrationMonitor waterEntry = new HydrationMonitor(waterAmount);
 			diet.addWater(waterEntry);
 		} else {
@@ -318,7 +336,5 @@ public class ActivePulse {
 		}
 	}
 
-	
 }
-
 
