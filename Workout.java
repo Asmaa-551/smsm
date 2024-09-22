@@ -62,6 +62,8 @@ public abstract class Workout {
 	        	return 1.0;	    
 	       }
 	}
+
+	public void updateWorkout(String attribute, Object value)throws InvalidAttributeException {}
 	
 	// Confirms that the workout has been logged by adding it to the WorkOutManager class and printing a message
     public void logWorkout() {
@@ -75,7 +77,6 @@ public abstract class Workout {
 				+ ", heartRate=" + heartRate + "Intensity Level = " + intensity + "Date = " + dateTime + "]";
 	}
 	public String getWorkoutDetails() {
-        return "Workout : duration=" + duration + ", caloriesBurned=" + caloriesBurned
-				+ ", heartRate=" + heartRate + "Intensity Level = " + intensity + "Date = " + dateTime;
+        return "duration: " + duration + ", heartRate: " + heartRate + ", Intensity Level: " + intensity + ", ";
     }
 }

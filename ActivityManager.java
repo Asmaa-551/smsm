@@ -10,7 +10,6 @@ public class ActivityManager {
     // Adds the workout to the list 
     public static void addWorkout(Workout workout) {
         workouts.add(workout);
-        System.out.println("Workout added at " + workout.getDateTime());
     }
     // examines that the exercise list is empty. Print a message if no workouts have been recorded
     public void displayWorkouts() {
