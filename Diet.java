@@ -19,6 +19,7 @@ public class Diet {
         water.add(waterEntry);
         System.out.println("Water intake logged: " + waterEntry.getWaterAmount() + " liters.");
     }
+    
 
 
     public int calculateTotalCalories() {

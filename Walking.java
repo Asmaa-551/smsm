@@ -60,7 +60,7 @@ public class Walking extends Workout implements WorkoutUpdater{
 
     @Override
     public String getWorkoutDetails() {
-        return "Walk Speed: " + getWalkspeed() + ", Weight: " + getWeight();
+        return super.getWorkoutDetails()+"Walk Speed: " + getWalkspeed() + ", Weight: " + getWeight();
     }
 
 	

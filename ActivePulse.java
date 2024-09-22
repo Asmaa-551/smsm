@@ -1,8 +1,13 @@
+import java.util.List;
 import java.util.Scanner;
+import java.util.ArrayList;
+
 
 public class ActivePulse {
 
 	private static WorkOutManager workoutManager = new WorkOutManager();
+	private static Diet diet = new Diet();
+
 	public static void main(String[] args) {
 		int userChoice;
 		do {
@@ -10,7 +15,7 @@ public class ActivePulse {
 			userChoice = UserMenuChoice();
 			switch (userChoice) {
 				case 1: LogNewWorkout(); break; 	
-				case 2: UpdateWorkout(null, null); break;	
+				case 2: UpdateWorkout(); break;	
 				case 3: SetUpdateFitnessGoals(); break;	
 				case 4: ViewProgress(); break;		
 				case 5: GeneratePerformanceReports(); break;	
@@ -22,7 +27,6 @@ public class ActivePulse {
 	}
 	
 	private static void NewExtraFunctionality() {
-		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'NewExtraFunctionality'");
 	}
 
@@ -130,53 +134,160 @@ public class ActivePulse {
 		}
 	}
 
-	public static void UpdateWorkout(Workout workout, Scanner input) {
-		if (workout == null) {
-			System.out.println("No workout to update.");
-		}
-	
-		System.out.println("Enter attribute to update (e.g., duration, caloriesburned, heartrate, intensity, underwaterdepth, swimmingstyle, laps): ");
-		String attribute = input.next().toLowerCase();
-		Object newValue = null;
-	
-		switch (attribute) {
-			case "underwaterdepth":
-			case "cyclingpower":
-			case "cyclingspeed":
-			case "weight":
-			case "totalweightlifted":
-			case "walkspeed":
-				System.out.println("Enter new value (double): ");
-				newValue = input.nextDouble();
-				break;
-			case "laps":
-			case "punches":
-			case "rounds":
-			case "numberofsets":
-			case "distance":
-				System.out.println("Enter new value (int): ");
-				newValue = input.nextInt();
-				break;
-			case "intensity":
-				System.out.println("Enter new value (char): ");
-				newValue = input.next().charAt(0);
-				break;
-			case "duration":
-				System.out.println("Enter new duration (in minutes): ");
-				newValue = input.nextDouble();
-				break;
-			case "caloriesburned":
-				System.out.println("Enter new calories burned: ");
-				newValue = input.nextInt();
-				break;
-			case "heartrate":
-				System.out.println("Enter new heart rate: ");
-				newValue = input.nextInt();
-				break;
-			default:
-				System.out.println("Invalid attribute type. Please try again.");
-		}
-	}
+	public static void UpdateWorkout() {
+
+    ArrayList<Workout> workouts = workoutManager.getWorkouts();
+	if (workouts.isEmpty()) {
+        System.out.println("No workouts available to update.");
+        return;
+    }
+    Scanner input = new Scanner(System.in);
+
+    System.out.println("Select a workout to update:");
+    for (int i = 0; i < workouts.size(); i++) {
+        System.out.println((i + 1) + ". " + workouts.get(i).getWorkoutDetails());
+    }
+
+    // Get the workout choice from the user
+    System.out.println("Enter the number of the workout you want to update: ");
+    int workoutChoice = input.nextInt();
+
+    // Validate the workout choice
+    if (workoutChoice < 1 || workoutChoice > workouts.size()) {
+        System.out.println("Invalid workout number. Please try again.");
+        return;
+    }
+
+    // Get the selected workout
+    Workout selectedWorkout = workouts.get(workoutChoice - 1);
+
+    System.out.println("Select an attribute to update:");
+    System.out.println("1. Duration");
+    System.out.println("2. Heart Rate");
+    System.out.println("3. Intensity");
+
+    // Add workout-specific attributes
+    if (selectedWorkout instanceof Swimming) {
+        System.out.println("4. Underwater Depth");
+        System.out.println("5. Swimming Style");
+        System.out.println("6. Laps");
+    } else if (selectedWorkout instanceof Cycling) {
+        System.out.println("4. Cycling Power");
+        System.out.println("5. Cycling Speed");
+        System.out.println("6. Cycling Distance");
+    } else if (selectedWorkout instanceof Running) {
+        System.out.println("4. Speed");
+        System.out.println("5. Distance");
+    } else if (selectedWorkout instanceof Walking) {
+        System.out.println("4. Walk Speed");
+        System.out.println("5. Weight");
+    } else if (selectedWorkout instanceof Boxing) {
+        System.out.println("4. Punches");
+        System.out.println("5. Rounds");
+    } else if (selectedWorkout instanceof Weightlifting) {
+        System.out.println("4. Total Weight Lifted");
+        System.out.println("5. Number of Sets");
+    }
+
+    // Get the attribute choice from the user
+    int attributeChoice = input.nextInt();
+    Object newValue = null;
+
+    // Update the selected attribute
+    switch (attributeChoice) {
+        case 1: // Duration
+            System.out.println("Enter new duration (in minutes): ");
+            newValue = input.nextDouble();
+            selectedWorkout.setDuration((double) newValue);
+            break;
+
+        case 2: // Heart Rate
+            System.out.println("Enter new heart rate: ");
+            newValue = input.nextInt();
+            selectedWorkout.setHeartRate((int) newValue);
+            break;
+
+        case 3: // Intensity
+            System.out.println("Enter new intensity (char): ");
+            newValue = input.next().charAt(0);
+            selectedWorkout.setIntensity((char) newValue);
+            break;
+
+        case 4:
+            if (selectedWorkout instanceof Swimming) {
+                System.out.println("Enter new underwater depth: ");
+                newValue = input.nextDouble();
+                ((Swimming) selectedWorkout).setUnderwaterDepth((double) newValue);
+            } else if (selectedWorkout instanceof Cycling) {
+                System.out.println("Enter new cycling power: ");
+                newValue = input.nextDouble();
+                ((Cycling) selectedWorkout).setCyclingPower((double) newValue);
+            } else if (selectedWorkout instanceof Running) {
+                System.out.println("Enter new speed: ");
+                newValue = input.nextInt();
+                ((Running) selectedWorkout).setSpeed((int) newValue);
+            } else if (selectedWorkout instanceof Walking) {
+                System.out.println("Enter new walk speed: ");
+                newValue = input.nextDouble();
+                ((Walking) selectedWorkout).setWalkspeed((double) newValue);
+            } else if (selectedWorkout instanceof Boxing) {
+                System.out.println("Enter new punches: ");
+                newValue = input.nextInt();
+                ((Boxing) selectedWorkout).setPunches((int) newValue);
+            } else if (selectedWorkout instanceof Weightlifting) {
+                System.out.println("Enter new total weight lifted: ");
+                newValue = input.nextDouble();
+                ((Weightlifting) selectedWorkout).setTotalWeightLifted((double) newValue);
+            }
+            break;
+
+        case 5:
+            if (selectedWorkout instanceof Swimming) {
+                System.out.println("Enter new swimming style: ");
+                newValue = input.next();
+                ((Swimming) selectedWorkout).setSwimwingStyle((String) newValue);
+            } else if (selectedWorkout instanceof Cycling) {
+                System.out.println("Enter new cycling speed: ");
+                newValue = input.nextDouble();
+                ((Cycling) selectedWorkout).setCyclingSpeed((double) newValue);
+            } else if (selectedWorkout instanceof Running) {
+                System.out.println("Enter new distance: ");
+                newValue = input.nextInt();
+                ((Running) selectedWorkout).setDistance((int) newValue);
+            } else if (selectedWorkout instanceof Walking) {
+                System.out.println("Enter new weight: ");
+                newValue = input.nextDouble();
+                ((Walking) selectedWorkout).setWeight((double) newValue);
+            } else if (selectedWorkout instanceof Boxing) {
+                System.out.println("Enter new rounds: ");
+                newValue = input.nextInt();
+                ((Boxing) selectedWorkout).setRounds((int) newValue);
+            } else if (selectedWorkout instanceof Weightlifting) {
+                System.out.println("Enter new number of sets: ");
+                newValue = input.nextInt();
+                ((Weightlifting) selectedWorkout).setNumberOfSets((int) newValue);
+            }
+            break;
+
+        case 6:
+            if (selectedWorkout instanceof Swimming) {
+                System.out.println("Enter new laps: ");
+                newValue = input.nextInt();
+                ((Swimming) selectedWorkout).setLaps((int) newValue);
+            } else if (selectedWorkout instanceof Cycling) {
+                System.out.println("Enter new cycling distance: ");
+                newValue = input.nextDouble();
+                ((Cycling) selectedWorkout).setCyclingDistance((double) newValue);
+            }
+            break;
+
+        default:
+            System.out.println("Invalid attribute choice.");
+            break;
+    }
+
+    System.out.println("Workout updated successfully.");
+}
 	
 
 	public static void SetUpdateFitnessGoals(){
@@ -202,5 +313,35 @@ public class ActivePulse {
             System.out.println("Invalid report type selected.");
         }
     }
+
+	public static void logFoodOrWater() {
+		Scanner input = new Scanner(System.in);
+	
+		System.out.println("Choose an option: 1. Log Meal 2. Log Water");
+		int choice = input.nextInt();
+	
+		if (choice == 1) {
+			System.out.println("Enter meal name: ");
+			String mealName = input.next();
+			System.out.println("Enter calories: ");
+			int calories = input.nextInt();
+			System.out.println("Enter protein amount: ");
+			double proteins = input.nextDouble();
+	
+			FoodItem foodItem = new FoodItem(mealName, calories, proteins);
+			diet.addFoodItem(foodItem);
+		} else if (choice == 2) {
+			System.out.println("Enter water amount (in liters): ");
+			double waterAmount = input.nextDouble();
+	
+			Water waterEntry = new Water(waterAmount);
+			diet.addWater(waterEntry);
+		} else {
+			System.out.println("Invalid choice. Please select 1 or 2.");
+		}
+	}
+
 	
 }
+
+

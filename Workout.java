@@ -79,5 +79,4 @@ public abstract class Workout {
         return "Workout : duration=" + duration + ", caloriesBurned=" + caloriesBurned
 				+ ", heartRate=" + heartRate + "Intensity Level = " + intensity + "Date = " + dateTime;
     }
-	
 }

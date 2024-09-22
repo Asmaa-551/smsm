@@ -97,6 +97,6 @@ public class Swimming extends Workout implements WorkoutUpdater {
 
     @Override
     public String getWorkoutDetails() {
-        return "Underwater Depth: " + getUnderwaterDepth() + ", Swimwing Style: " + getSwimwingStyle() + ", Laps: " + getLaps();
+        return super.getWorkoutDetails()+ "Underwater Depth: " + getUnderwaterDepth() + ", Swimwing Style: " + getSwimwingStyle() + ", Laps: " + getLaps();
     }
 }
