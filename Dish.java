@@ -50,7 +50,6 @@ public class Dish {
 
     public static void logWaterIntake(Dish foodItems) {
         FoodItem.add(foodItems);
-        System.out.println("Workout added at " + foodItems.getDateLogged());
     }
 
     public static ArrayList<Dish> getFoodItems() {

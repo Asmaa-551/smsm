@@ -31,7 +31,6 @@ public class HydrationMonitor {
 
     public static void logWaterIntake(HydrationMonitor waters) {
         water.add(waters);
-        System.out.println("Workout added at " + waters.getIntakeDateTime());
     }
 
     public static ArrayList<HydrationMonitor> getWater() {

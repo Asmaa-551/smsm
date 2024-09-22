@@ -81,7 +81,6 @@ public class Performance {
         int totalCaloriesBurned = 0;
         double totalDuration = 0;
     
-        // Accumulators for averages and counts
         double totalRunningSpeed = 0;
         double totalRunningDistance = 0;
         double totalCyclingPower = 0;
