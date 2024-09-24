@@ -75,9 +75,9 @@ public class Swimming extends Workout implements WorkoutUpdater {
                 this.swimwingStyle = (String) newValue;
                 break;
             case "laps":
-                this.laps = (int) newValue;
+            this.laps = (int) newValue;                
                 break;
-                case "duration":
+             case "duration":
 				setDuration((double) newValue); 
 				break;
 			case "caloriesburned":
