@@ -390,6 +390,16 @@ public static void UpdateWorkout() {
 		}
 	}
 
+	private static boolean isValidSwimmingStyle(String style) {
+		String[] validStyles = {"freestyle", "breaststroke", "backstroke", "butterfly"};
+		for (String validStyle : validStyles) {
+			if (validStyle.equalsIgnoreCase(style)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	
 }
 
