@@ -243,9 +243,14 @@ public static void UpdateWorkout() {
             switch (attributeName) {
                 case "duration":
                 case "underwaterdepth":
-                    newValue = input.nextDouble(); // Expecting double
-                    validInput = true; // Set to true if input is successful
-                    break;
+                    newValue = input.nextDouble(); 
+					if ((double)newValue <= 0) { 
+						System.out.println("Invalid input, please enter a positive number.");
+						validInput = false;
+					} else {
+						validInput = true; 
+					}
+					break;
                 case "heartrate":
                 case "intensity":
                 case "cyclingpower":
@@ -255,7 +260,6 @@ public static void UpdateWorkout() {
                 case "totalweightlifted":
                 case "numberofsets":
                 case "laps":
-                    newValue = input.nextInt(); 
                     validInput = true;
                     break;
                 case "swimmingstyle":
@@ -301,6 +305,9 @@ public static void UpdateWorkout() {
 		System.out.println("3 - Monthly Goals");
 	
 		int choice = input.nextInt();
+		if (choice <= 0) { 
+			System.out.println("Invalid input, please enter a positive number.");
+		}
 		try {	
 		switch (choice) {
 			case 1:
@@ -326,6 +333,9 @@ public static void UpdateWorkout() {
         Scanner input = new Scanner(System.in);
         System.out.println("Choose report type: 1. Weekly 2. Monthly");
         int reportType = input.nextInt();
+		if (reportType <= 0) { 
+			System.out.println("Invalid input, please enter a positive number.");
+		}
 
         Performance performance = new Performance(workoutManager.getWorkouts(), diet.getwater(), diet.getFoodItem());
 		try{
@@ -347,6 +357,9 @@ public static void UpdateWorkout() {
 	
 		System.out.println("Choose an option: 1. Log Meal 2. Log Water");
 		int choice = input.nextInt();
+		if (choice <= 0) { 
+			System.out.println("Invalid input, please enter a positive number.");
+		}
 		try {
 		if (choice == 1) {
 			System.out.println("Enter meal name: ");
