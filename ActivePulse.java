@@ -525,7 +525,10 @@ public static void UpdateWorkout() {
 	}
 	catch (InvalidChoiceException e) {
 		System.out.println(e.getMessage());
-		}
+	}
+	catch (IllegalArgumentException e){
+		System.out.println(e.getMessage());
+	}
     }
 
 	public static void logFoodOrWater() {
