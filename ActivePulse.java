@@ -540,17 +540,17 @@ public static void UpdateWorkout() {
 		if (choice == 1) {
 			System.out.println("Enter meal name: ");
 			String mealName = input.next();
-			System.out.println("Enter calories: ");
 			int calories;
 			do {
+				System.out.println("Enter calories: ");
                 calories = input.nextInt();
                 if (calories < 0) {
                     System.out.println("Calories cannot be negative. Please enter a positive value.");
                 }
             } while (calories < 0);
-			System.out.println("Enter protein amount: ");
 			double proteins;
 			do {
+				System.out.println("Enter protein amount: ");
                 proteins = input.nextDouble();
                 if (proteins < 0) {
                     System.out.println("Protein amount cannot be negative. Please enter a positive value.");
@@ -577,6 +577,9 @@ public static void UpdateWorkout() {
 	catch (InvalidChoiceException e) {
 		System.out.println(e.getMessage());
 		}
+	catch (InputMismatchException e){
+		System.out.println(e.getMessage());
+	}
 	}
 
 	private static boolean isValidSwimmingStyle(String style) {
