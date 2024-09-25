@@ -85,12 +85,22 @@ public class ActivePulse {
 			}
 		}
 		
-		System.out.println("Enter intensity (e.g., A, B, C): ");
-		char intensity = input.next().charAt(0);
-		if(intensity != 'A' && intensity != 'B' && intensity != 'C') {
-            System.out.println("Invalid intensity, please enter 'A', 'B', or 'C'.");
-			input.next();
-        }
+		char intensity = 'A';  
+		while (true) {
+			System.out.println("Enter intensity (e.g., A, B, C): ");
+			String inputIntensity = input.next().toUpperCase();
+
+			if (inputIntensity.length() == 1) { 
+				intensity = inputIntensity.charAt(0); 
+				if (intensity == 'A' || intensity == 'B' || intensity == 'C') {
+					break;  
+				} else {
+					System.out.println("Invalid intensity. Please enter 'A', 'B', or 'C'.");
+				}
+			} else {
+				System.out.println("Invalid input. Please enter a single character (A, B, or C).");
+			}
+		}
 	
 		switch (workoutType) {
 			case 1: // Walking
