@@ -145,7 +145,7 @@ public class ActivePulse {
 			while (true) {
 				System.out.println("Enter speed (in km/h): ");
 				speed = input.nextInt();
-				if (speed > 0) {
+				if (speed >= 0) {
 					break;
 				} else {
 					System.out.println("Invalid speed. Please enter a positive number.");
@@ -391,6 +391,8 @@ public static void UpdateWorkout() {
 				case "totalweightlifted":
 				case "cyclingspeed":
 				case "weight":
+				case "walkspeed":
+				case "cyclingdistance":
 					newValue = input.nextDouble(); 
 					if ((double) newValue <= 0) { 
 						System.out.println("Invalid input, please enter a positive number.");
@@ -403,6 +405,8 @@ public static void UpdateWorkout() {
 				case "speed":
 				case "numberofsets":
 				case "laps":
+				case "punches":
+				case "distance":
 					newValue = input.nextInt(); 
 					if ((int) newValue <= 0) {
 						System.out.println("Invalid input, please enter a positive number.");

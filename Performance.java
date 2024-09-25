@@ -175,7 +175,7 @@ public class Performance {
     
         if (swimmingCount > 0) {
             double avgDepth = totalSwimmingDepth / swimmingCount;
-            System.out.printf("Total swims: %d with an average underwater depth of %.2f meters and a total of %.2f laps.%n", swimmingCount, avgDepth, totalNumSwimRounds);
+            System.out.printf("Total swims: %d with an average underwater depth of %.2f meters and a total of %d laps.%n", swimmingCount, avgDepth, totalNumSwimRounds);
         }
     
         if (walkingCount > 0) {
@@ -184,12 +184,12 @@ public class Performance {
         }
     
         if (boxingCount > 0) {
-            System.out.printf("Total boxing sessions: %d with a total of %d punches and an total of %.2f rounds.%n", boxingCount, totalBoxingPunches, totalNumRounds);
+            System.out.printf("Total boxing sessions: %d with a total of %d punches and an total of %d rounds.%n", boxingCount, totalBoxingPunches, totalNumRounds);
         }
     
         if (weightliftingCount > 0) {
             double avgWeight = totalWeightLifted / weightliftingCount;
-            System.out.printf("Total weightlifting sessions: %d with an average total weight lifted of %.2f kg and a total of %.2f sets.%n", weightliftingCount, avgWeight, totalNumSets);
+            System.out.printf("Total weightlifting sessions: %d with an average total weight lifted of %.2f kg and a total of %d sets.%n", weightliftingCount, avgWeight, totalNumSets);
         }
     }
     

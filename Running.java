@@ -22,6 +22,9 @@ public class Running extends Workout implements WorkoutUpdater{
 	@Override
 	public double calculateCalories() {
         int caloriesBurned;
+		if (speed == 0) {
+			throw new ArithmeticException("Division by zero. The speed of the running workout is set to 0, please update it.");
+		}
         caloriesBurned = (int) (intensity(getIntensity()) * (getDuration()/speed) * this.distance);
         return caloriesBurned;
     }
