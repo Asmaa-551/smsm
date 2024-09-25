@@ -36,34 +36,34 @@ public class SetGoal {
             case 1:
                 dailyGoalStartTime = LocalDate.now().atStartOfDay();
                 System.out.println("Setting Daily Goals:");
-                System.out.print("Calories Burned: ");
-                dailyGoalCalories = input.nextInt();
-                if ( dailyGoalCalories> 0) {
-					break;
-				} else {
-					System.out.println("Please enter a positive number.");
-				}
-                System.out.print("Workout Duration (minutes): ");
-                dailyDurationGoal = input.nextDouble();
-                if ( dailyDurationGoal> 0) {
-					break;
-				} else {
-					System.out.println("Please enter a positive number.");
-				}
-                System.out.print("Water Intake (liters): ");
-                dailyWaterGoal = input.nextDouble();
-                if ( dailyWaterGoal> 0) {
-					break;
-				} else {
-					System.out.println("Please enter a positive number.");
-				}
-                System.out.print("Protein Intake (grams): ");
-                dailyProteinGoal = input.nextDouble();
-                if ( dailyProteinGoal> 0) {
-					break;
-				} else {
-					System.out.println("Please enter a positive number.");
-				}
+                do {
+                    System.out.print("Calories Burned: ");
+                    dailyGoalCalories = input.nextInt();
+                    if (dailyGoalCalories < 0) {
+                        System.out.println("Please enter a positive value.");
+                    }
+                } while (dailyGoalCalories < 0);
+                do {
+                    System.out.print("Workout Duration (minutes): ");
+                    dailyDurationGoal = input.nextDouble();
+                    if (dailyDurationGoal < 0) {
+                        System.out.println("Please enter a positive value.");
+                    }
+                } while (dailyDurationGoal < 0);
+                do {
+                    System.out.print("Water Intake (liters): ");
+                    dailyWaterGoal = input.nextDouble();
+                    if (dailyWaterGoal < 0) {
+                        System.out.println("Please enter a positive value.");
+                    }
+                } while (dailyWaterGoal < 0);
+                do {
+                    System.out.print("Protein Intake (grams): ");
+                    dailyProteinGoal = input.nextDouble();
+                    if (dailyProteinGoal < 0) {
+                        System.out.println("Please enter a positive value.");
+                    }
+                } while (dailyProteinGoal < 0);
                 System.out.println("Daily goals updated successfully!");
                 break;
             
