@@ -52,11 +52,11 @@ public abstract class Workout {
 
 	public double intensity(char intensity) {
 	    switch (intensity) {
-	        case 'L':
+	        case 'A':
 	            return 4.5;
-	        case 'M':
+	        case 'B':
 	            return 6.0;
-	        case 'H':
+	        case 'C':
 	            return 8.0;
 	        default:
 	        	return 1.0;	    

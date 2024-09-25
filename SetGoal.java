@@ -23,24 +23,7 @@ public class SetGoal {
 
     public SetGoal() {}
 
-    public SetGoal(int dailyGoalCalories, double dailyDurationGoal, double dailyWaterGoal, double dailyProteinGoal,
-                   int weeklyGoalCalories, double weeklyDurationGoal, double weeklyWaterGoal, double weeklyProteinGoal,
-                   int monthlyGoalCalories, double monthlyDurationGoal, double monthlyWaterGoal, double monthlyProteinGoal) {
-        this.dailyGoalCalories = dailyGoalCalories;
-        this.dailyDurationGoal = dailyDurationGoal;
-        this.dailyWaterGoal = dailyWaterGoal;
-        this.dailyProteinGoal = dailyProteinGoal;
-        this.weeklyGoalCalories = weeklyGoalCalories;
-        this.weeklyDurationGoal = weeklyDurationGoal;
-        this.weeklyWaterGoal = weeklyWaterGoal;
-        this.weeklyProteinGoal = weeklyProteinGoal;
-        this.monthlyGoalCalories = monthlyGoalCalories;
-        this.monthlyDurationGoal = monthlyDurationGoal;
-        this.monthlyWaterGoal = monthlyWaterGoal;
-        this.monthlyProteinGoal = monthlyProteinGoal;
-    }
-
-    // Gives the user the option to create or modify objectives on a daily, weekly, or monthly basis.
+    // Gives the user the option to create or modify goals on a daily, weekly, or monthly basis.
     public void setUpdateGoals() {
         Scanner input = new Scanner(System.in);
         
