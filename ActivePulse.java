@@ -46,7 +46,7 @@ public class ActivePulse {
 		Scanner input = new Scanner(System.in);
 		int choice;
 		do {
-			System.out.println("Your Choice (0, 1, 2, 3, 4, 5, 6, 7):");
+			System.out.println("Your Choice (0, 1, 2, 3, 4, 5, 6):");
 			choice = input.nextInt();
 			if(choice < 0 || choice > 6) {
 				System.out.println("Invalid Choice, Please Try Again.");
@@ -69,36 +69,28 @@ public class ActivePulse {
 			System.out.println("Enter duration (in minutes): ");
 			duration = input.nextInt();
 			if (duration >= 0) {
-				break; // Valid input, break the loop
+				break;
 			} else {
 				System.out.println("Invalid duration. Please enter a positive number.");
 			}
 		}
-		System.out.println("Enter heart rate (in bpm): ");
-		int heartRate = input.nextInt();
-		if(heartRate<= 0) {
-            System.out.println("Invalid heart rate, please enter a positive number.");
-			input.nextInt();
-        }
-		char intensity = 'A';  
+		int heartRate = -1;
 		while (true) {
-			System.out.println("Enter intensity (e.g., A, B, C): ");
-			String inputIntensity = input.next().toUpperCase();
-
-			if (inputIntensity.length() == 1) { 
-				intensity = inputIntensity.charAt(0); 
-				if (intensity == 'A' || intensity == 'B' || intensity == 'C') {
-					break;  
-				} else {
-					System.out.println("Invalid intensity. Please enter 'A', 'B', or 'C'.");
-				}
+			System.out.println("Enter heart rate (in bpm): ");
+			heartRate = input.nextInt();
+			if (heartRate > 0) {
+				break;
 			} else {
-				System.out.println("Invalid input. Please enter a single character (A, B, or C).");
+				System.out.println("Invalid heart rate. Please enter a positive number.");
 			}
 		}
-
 		
-
+		System.out.println("Enter intensity (e.g., A, B, C): ");
+		char intensity = input.next().charAt(0);
+		if(intensity != 'A' && intensity != 'B' && intensity != 'C') {
+            System.out.println("Invalid intensity, please enter 'A', 'B', or 'C'.");
+			input.next();
+        }
 	
 		switch (workoutType) {
 			case 1: // Walking
@@ -328,7 +320,7 @@ public static void UpdateWorkout() {
 		System.out.println("3 - Monthly Goals");
 	
 		int choice = input.nextInt();
-		if (choice <= 0) { 
+		if (!(choice == 1 || choice == 2 || choice == 3)) { 
 			System.out.println("Invalid input, please enter a positive number.");
 			input.next();
 		}
