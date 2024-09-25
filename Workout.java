@@ -62,8 +62,6 @@ public abstract class Workout {
 	        	return 1.0;	    
 	       }
 	}
-
-	public void updateWorkout(String attribute, Object value)throws InvalidAttributeException {}
 	
 	// Confirms that the workout has been logged by adding it to the WorkOutManager class and printing a message
     public void logWorkout() {
