@@ -38,12 +38,32 @@ public class SetGoal {
                 System.out.println("Setting Daily Goals:");
                 System.out.print("Calories Burned: ");
                 dailyGoalCalories = input.nextInt();
+                if ( dailyGoalCalories> 0) {
+					break;
+				} else {
+					System.out.println("Please enter a positive number.");
+				}
                 System.out.print("Workout Duration (minutes): ");
                 dailyDurationGoal = input.nextDouble();
+                if ( dailyDurationGoal> 0) {
+					break;
+				} else {
+					System.out.println("Please enter a positive number.");
+				}
                 System.out.print("Water Intake (liters): ");
                 dailyWaterGoal = input.nextDouble();
+                if ( dailyWaterGoal> 0) {
+					break;
+				} else {
+					System.out.println("Please enter a positive number.");
+				}
                 System.out.print("Protein Intake (grams): ");
                 dailyProteinGoal = input.nextDouble();
+                if ( dailyProteinGoal> 0) {
+					break;
+				} else {
+					System.out.println("Please enter a positive number.");
+				}
                 System.out.println("Daily goals updated successfully!");
                 break;
             
@@ -52,12 +72,32 @@ public class SetGoal {
                 System.out.println("Setting Weekly Goals:");
                 System.out.print("Calories Burned: ");
                 weeklyGoalCalories = input.nextInt();
+                if ( weeklyGoalCalories> 0) {
+					break;
+				} else {
+					System.out.println("Please enter a positive number.");
+				}
                 System.out.print("Workout Duration (minutes): ");
                 weeklyDurationGoal = input.nextDouble();
+                if ( weeklyDurationGoal> 0) {
+					break;
+				} else {
+					System.out.println("Please enter a positive number.");
+				}
                 System.out.print("Water Intake (liters): ");
                 weeklyWaterGoal = input.nextDouble();
+                if ( weeklyWaterGoal> 0) {
+					break;
+				} else {
+					System.out.println("Please enter a positive number.");
+				}
                 System.out.print("Protein Intake (grams): ");
                 weeklyProteinGoal = input.nextDouble();
+                if (weeklyProteinGoal > 0) {
+					break;
+				} else {
+					System.out.println("Please enter a positive number.");
+				}
                 System.out.println("Weekly goals updated successfully!");
                 break;
             
@@ -66,12 +106,32 @@ public class SetGoal {
                 System.out.println("Setting Monthly Goals:");
                 System.out.print("Calories Burned: ");
                 monthlyGoalCalories = input.nextInt();
+                if (monthlyGoalCalories > 0) {
+					break;
+				} else {
+					System.out.println("Please enter a positive number.");
+				}
                 System.out.print("Workout Duration (minutes): ");
                 monthlyDurationGoal = input.nextDouble();
+                if (monthlyDurationGoal > 0) {
+					break;
+				} else {
+					System.out.println("Please enter a positive number.");
+				}
                 System.out.print("Water Intake (liters): ");
                 monthlyWaterGoal = input.nextDouble();
+                if (monthlyWaterGoal > 0) {
+					break;
+				} else {
+					System.out.println("Please enter a positive number.");
+				}
                 System.out.print("Protein Intake (grams): ");
                 monthlyProteinGoal = input.nextDouble();
+                if (monthlyProteinGoal > 0) {
+					break;
+				} else {
+					System.out.println("Please enter a positive number.");
+				}
                 System.out.println("Monthly goals updated successfully!");
                 break;
             
