@@ -46,7 +46,7 @@ public class ActivePulse {
 		Scanner input = new Scanner(System.in);
 		int choice;
 		do {
-			System.out.println("Your Choice (0, 1, 2, 3, 4, 5, 6, 7):");
+			System.out.println("Your Choice (0, 1, 2, 3, 4, 5, 6):");
 			choice = input.nextInt();
 			if(choice < 0 || choice > 6) {
 				System.out.println("Invalid Choice, Please Try Again.");
@@ -69,17 +69,21 @@ public class ActivePulse {
 			System.out.println("Enter duration (in minutes): ");
 			duration = input.nextInt();
 			if (duration >= 0) {
-				break; // Valid input, break the loop
+				break;
 			} else {
 				System.out.println("Invalid duration. Please enter a positive number.");
 			}
 		}
-		System.out.println("Enter heart rate (in bpm): ");
-		int heartRate = input.nextInt();
-		if(heartRate<= 0) {
-            System.out.println("Invalid heart rate, please enter a positive number.");
-			input.nextInt();
-        }
+		int heartRate = -1;
+		while (true) {
+			System.out.println("Enter heart rate (in bpm): ");
+			heartRate = input.nextInt();
+			if (heartRate > 0) {
+				break;
+			} else {
+				System.out.println("Invalid heart rate. Please enter a positive number.");
+			}
+		}
 		
 		System.out.println("Enter intensity (e.g., A, B, C): ");
 		char intensity = input.next().charAt(0);
