@@ -63,21 +63,29 @@ public class ActivePulse {
 	
 		Workout workout = null;
 	
-		// Gather common workout attributes
-		System.out.println("Enter duration (in minutes): ");
-		double duration = input.nextDouble();
-		if(duration <= 0) {
-            System.out.println("Invalid duration, please enter a positive number.");
-        }
+		int duration = -1;
+
+		while (true) {
+			System.out.println("Enter duration (in minutes): ");
+			duration = input.nextInt();
+			if (duration >= 0) {
+				break; // Valid input, break the loop
+			} else {
+				System.out.println("Invalid duration. Please enter a positive number.");
+			}
+		}
 		System.out.println("Enter heart rate (in bpm): ");
 		int heartRate = input.nextInt();
 		if(heartRate<= 0) {
             System.out.println("Invalid heart rate, please enter a positive number.");
+			input.nextInt();
         }
+		
 		System.out.println("Enter intensity (e.g., A, B, C): ");
 		char intensity = input.next().charAt(0);
 		if(intensity != 'A' && intensity != 'B' && intensity != 'C') {
             System.out.println("Invalid intensity, please enter 'A', 'B', or 'C'.");
+			input.next();
         }
 	
 		switch (workoutType) {
@@ -143,6 +151,7 @@ public class ActivePulse {
 	
 			default:
 				System.out.println("Invalid workout type selected.");
+				input.next();
 				return;
 		}
 	
@@ -169,6 +178,7 @@ public static void UpdateWorkout() {
 
     if (workoutChoice < 1 || workoutChoice > workouts.size()) {
         System.out.println("Invalid workout number. Please try again.");
+		input.next();
         return;
     }
 
@@ -231,6 +241,7 @@ public static void UpdateWorkout() {
             break;
         default:
             System.out.println("Invalid attribute selection.");
+			input.next();
             return;
     }
 
@@ -307,6 +318,7 @@ public static void UpdateWorkout() {
 		int choice = input.nextInt();
 		if (!(choice == 1 || choice == 2 || choice == 3)) { 
 			System.out.println("Invalid input, please enter a positive number.");
+			input.next();
 		}
 		try {	
 		switch (choice) {
@@ -335,6 +347,7 @@ public static void UpdateWorkout() {
         int reportType = input.nextInt();
 		if (reportType <= 0) { 
 			System.out.println("Invalid input, please enter a positive number.");
+			input.next();
 		}
 
         Performance performance = new Performance(workoutManager.getWorkouts(), diet.getwater(), diet.getFoodItem());
