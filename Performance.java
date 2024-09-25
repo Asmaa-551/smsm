@@ -16,6 +16,7 @@ public class Performance {
         this.water = water;
         this.foodItems = foodItems;
     }
+    
     // Provides a weekly performance report using information from the previous 7 days
     public void generateWeeklyReport() {
         LocalDateTime now = LocalDateTime.now();
@@ -28,6 +29,7 @@ public class Performance {
         System.out.println("Weekly Performance Report:");
         generateReport(weeklyWorkouts, weeklyFoodItems, weeklyWater);
     }
+
     // Provides a monthly performance report using information from the previous 30 days
     public void generateMonthlyReport() {
         LocalDateTime now = LocalDateTime.now();
@@ -54,8 +56,8 @@ public class Performance {
         
         return filteredWorkouts; 
     }
+    
      // Sorts food items according to the date of ranges
-
     public ArrayList<Dish> filterFoodByDate(LocalDateTime startDateTime, LocalDateTime endDateTime) {
         ArrayList<Dish> filteredFoodItems = new ArrayList<>();
         for (Dish item : foodItems) {
@@ -65,8 +67,8 @@ public class Performance {
         }
         return filteredFoodItems;
     }
-    // Sorts water intake according to the date of ranges
 
+    // Sorts water intake according to the date of ranges
     public ArrayList<HydrationMonitor> filterWaterByDate(LocalDateTime startDateTime, LocalDateTime endDateTime) {
         ArrayList<HydrationMonitor> filteredWater = new ArrayList<>();
         for (HydrationMonitor waterEntry : water) {

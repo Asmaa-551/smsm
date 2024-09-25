@@ -305,7 +305,7 @@ public static void UpdateWorkout() {
 		System.out.println("3 - Monthly Goals");
 	
 		int choice = input.nextInt();
-		if (choice <= 0) { 
+		if (!(choice == 1 || choice == 2 || choice == 3)) { 
 			System.out.println("Invalid input, please enter a positive number.");
 		}
 		try {	
