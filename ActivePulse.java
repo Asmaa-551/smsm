@@ -33,11 +33,11 @@ public class ActivePulse {
 		System.out.println("Personal Fitness Tracker System (ActivePulse, Fall 24-25)");
 		System.out.println("------------------------------------------------------------");
 		System.out.println("1. Log a new workout (Running, Cycling, Weightlifting, Swimming, ...)");
-		System.out.println("2. Log nutritional intake (meals and water).");
-		System.out.println("3. Update workout details (duration, distance, calories, etc.)");
-		System.out.println("4. Set or update fitness goals.");
+		System.out.println("2. Log nutritional intake (Meals and Water).");
+		System.out.println("3. Update workout details (Duration, Distance, Calories, etc.)");
+		System.out.println("4. Set or update fitness goals (Daily, Weekly, Monthly)");
 		System.out.println("5. View progress toward goals.");
-		System.out.println("6. Generate performance reports (weekly, monthly, etc.)");
+		System.out.println("6. Generate performance reports (Weekly, Monthly)");
 		System.out.println("0. Exit");
 		System.out.println("------------------------------------------------------------");
 	}
@@ -130,56 +130,156 @@ public class ActivePulse {
 
 	
 			case 2: // Running
+			int runningDistance = -1;
+			while (true) {
 				System.out.println("Enter distance (in kilometers): ");
-				int runningDistance = input.nextInt(); // Use double for more accuracy
+				runningDistance = input.nextInt();
+				if (runningDistance > 0) {
+					break;
+				} else {
+					System.out.println("Invalid distance. Please enter a positive number.");
+				}
+			}
+			
+			int speed = -1;
+			while (true) {
 				System.out.println("Enter speed (in km/h): ");
-				int speed = input.nextInt();
-				workout = new Running(speed, runningDistance, duration, heartRate, intensity);
-				break;
+				speed = input.nextInt();
+				if (speed > 0) {
+					break;
+				} else {
+					System.out.println("Invalid speed. Please enter a positive number.");
+				}
+			}
+			
+			workout = new Running(speed, runningDistance, duration, heartRate, intensity);
+			break;
 	
 			case 3: // Cycling
+			double cyclingPower = -1;
+			while (true) {
 				System.out.println("Enter cycling power (in watts): ");
-				double cyclingPower = input.nextDouble();
+				cyclingPower = input.nextDouble();
+				if (cyclingPower > 0) {
+					break;
+				} else {
+					System.out.println("Invalid power. Please enter a positive number.");
+				}
+			}
+			
+			double cyclingSpeed = -1;
+			while (true) {
 				System.out.println("Enter cycling speed (in km/h): ");
-				double cyclingSpeed = input.nextDouble();
+				cyclingSpeed = input.nextDouble();
+				if (cyclingSpeed > 0) {
+					break;
+				} else {
+					System.out.println("Invalid speed. Please enter a positive number.");
+				}
+			}
+			
+			double cyclingDistance = -1;
+			while (true) {
 				System.out.println("Enter cycling distance (in kilometers): ");
-				double cyclingDistance = input.nextDouble();
-				workout = new Cycling(duration, heartRate, intensity, cyclingDistance, cyclingPower, cyclingSpeed);
-				break;
+				cyclingDistance = input.nextDouble();
+				if (cyclingDistance > 0) {
+					break;
+				} else {
+					System.out.println("Invalid distance. Please enter a positive number.");
+				}
+			}
+			
+			workout = new Cycling(duration, heartRate, intensity, cyclingDistance, cyclingPower, cyclingSpeed);
+			break;
 	
 			case 4: // Swimming
+			double underwaterDepth = -1;
+			while (true) {
 				System.out.println("Enter underwater depth (in meters): ");
-				double underwaterDepth = input.nextDouble();
-				String swimmingStyle;
-				while (true) {
-					System.out.println("Enter swimming style (freestyle, breaststroke, backstroke, butterfly): ");
-					swimmingStyle = input.next();
-					if (isValidSwimmingStyle(swimmingStyle)) {
-						break;
-					} else {
-						System.out.println("Invalid swimming style. Please enter a valid style.");
-					}
+				underwaterDepth = input.nextDouble();
+				if (underwaterDepth >= 0) {  // here we assume that the depth can be zero for some cases
+					break;
+				} else {
+					System.out.println("Invalid depth. Please enter a non-negative number.");
 				}
+			}
+			
+			String swimmingStyle;
+			while (true) {
+				System.out.println("Enter swimming style (freestyle, breaststroke, backstroke, butterfly): ");
+				swimmingStyle = input.next();
+				if (isValidSwimmingStyle(swimmingStyle)) {
+					break;
+				} else {
+					System.out.println("Invalid swimming style. Please enter a valid style.");
+				}
+			}
+			
+			int laps = -1;
+			while (true) {
 				System.out.println("Enter number of laps: ");
-				int laps = input.nextInt();
-				workout = new Swimming(duration, heartRate, intensity, underwaterDepth, swimmingStyle, laps);
-				break;
+				laps = input.nextInt();
+				if (laps > 0) {
+					break;
+				} else {
+					System.out.println("Invalid number of laps. Please enter a positive number.");
+				}
+			}
+			
+			workout = new Swimming(duration, heartRate, intensity, underwaterDepth, swimmingStyle, laps);
+			break;
 	
 			case 5: // Boxing
+			int punches = -1;
+			while (true) {
 				System.out.println("Enter number of punches: ");
-				int punches = input.nextInt();
+				punches = input.nextInt();
+				if (punches > 0) {
+					break;
+				} else {
+					System.out.println("Invalid number of punches. Please enter a positive number.");
+				}
+			}
+			
+			int rounds = -1;
+			while (true) {
 				System.out.println("Enter number of rounds: ");
-				int rounds = input.nextInt();
-				workout = new Boxing(duration, heartRate, intensity, punches, rounds);
-				break;
+				rounds = input.nextInt();
+				if (rounds > 0) {
+					break;
+				} else {
+					System.out.println("Invalid number of rounds. Please enter a positive number.");
+				}
+			}
+			
+			workout = new Boxing(duration, heartRate, intensity, punches, rounds);
+			break;
 	
 			case 6: // Weightlifting
+			double totalWeightLifted = -1;
+			while (true) {
 				System.out.println("Enter total weight lifted (in kg): ");
-				double totalWeightLifted = input.nextDouble();
+				totalWeightLifted = input.nextDouble();
+				if (totalWeightLifted > 0) {
+					break;
+				} else {
+					System.out.println("Invalid weight. Please enter a positive number.");
+				}
+			}
+			
+			int numberOfSets = -1;
+			while (true) {
 				System.out.println("Enter number of sets: ");
-				int numberOfSets = input.nextInt();
-				workout = new Weightlifting(totalWeightLifted, numberOfSets, duration, heartRate, intensity);
-				break;
+				numberOfSets = input.nextInt();
+				if (numberOfSets > 0) {
+					break;
+				} else {
+					System.out.println("Invalid number of sets. Please enter a positive number.");
+				}
+			}
+			
+			workout = new Weightlifting(totalWeightLifted, numberOfSets, duration, heartRate, intensity);
+			break;
 	
 			default:
 				System.out.println("Invalid workout type selected.");
@@ -208,11 +308,10 @@ public static void UpdateWorkout() {
     System.out.println("Enter the number of the workout you want to update: ");
     int workoutChoice = input.nextInt();
 
-    if (workoutChoice < 1 || workoutChoice > workouts.size()) {
-        System.out.println("Invalid workout number. Please try again.");
-		input.next();
-        return;
-    }
+    try {
+        if (workoutChoice < 1 || workoutChoice > workouts.size()) {
+            throw new InvalidChoiceException("Invalid workout number. Please select a valid number between 1 and " + workouts.size());
+        }
 
     WorkoutUpdater selectedWorkout = (WorkoutUpdater) workouts.get(workoutChoice - 1);
 
@@ -221,6 +320,7 @@ public static void UpdateWorkout() {
     System.out.println("2. Heart Rate");
     System.out.println("3. Intensity");
 
+	// check what class is the object is an instance of
     if (selectedWorkout instanceof Swimming) {
         System.out.println("4. Underwater Depth");
         System.out.println("5. Swimming Style");
@@ -244,7 +344,7 @@ public static void UpdateWorkout() {
     }
 
     int attributeChoice = input.nextInt();
-    input.nextLine(); // Clear the buffer
+    input.nextLine();
     String attributeName = "";
 
     switch (attributeChoice) {
@@ -322,7 +422,7 @@ public static void UpdateWorkout() {
 							validInput = true;
 							break;
 						} else {
-							System.out.println("Invalid intensity. Please enter L, M, or H.");
+							System.out.println("Invalid intensity. Please enter A, B, or C.");
 						}
 					}
 					break;
@@ -350,6 +450,7 @@ public static void UpdateWorkout() {
 			System.out.println("Invalid input. Please enter a valid value for " + attributeName + ".");
 			input.nextLine();
 		}
+		
 	}
 
     try {
@@ -358,7 +459,12 @@ public static void UpdateWorkout() {
     } catch (InvalidAttributeException e) {
         System.out.println("Error updating workout: " + e.getMessage());
     }
+	} 
+	catch (InvalidChoiceException e) {
+		System.out.println(e.getMessage());
+	}
 }
+
 
 	public static void SetUpdateFitnessGoals(){
 		goal.setUpdateGoals();
@@ -373,10 +479,6 @@ public static void UpdateWorkout() {
 		System.out.println("3 - Monthly Goals");
 	
 		int choice = input.nextInt();
-		if (!(choice == 1 || choice == 2 || choice == 3)) { 
-			System.out.println("Invalid input, please enter a positive number.");
-			input.next();
-		}
 		try {	
 		switch (choice) {
 			case 1:
