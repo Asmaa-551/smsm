@@ -94,12 +94,30 @@ public class ActivePulse {
 	
 		switch (workoutType) {
 			case 1: // Walking
+			double walkSpeed = -1;
+
+			while (true) {
 				System.out.println("Enter walk speed (in km/h): ");
-				double walkSpeed = input.nextDouble();
+				walkSpeed = input.nextDouble();
+				if (walkSpeed > 0) {
+					break;
+				} else {
+					System.out.println("Invalid walk speed. Please enter a positive number.");
+				}
+			}
+			double weight = -1;
+			while (true) {
 				System.out.println("Enter your weight (in kg): ");
-				double weight = input.nextDouble();
-				workout = new Walking(duration, heartRate, intensity, walkSpeed, weight);
-				break;
+				weight = input.nextDouble();
+				if (weight > 0) {
+					break;
+				} else {
+					System.out.println("Invalid weight. Please enter a positive number.");
+				}
+			}
+			workout = new Walking(duration, heartRate, intensity, walkSpeed, weight);
+			break;
+
 	
 			case 2: // Running
 				System.out.println("Enter distance (in kilometers): ");
@@ -249,55 +267,80 @@ public static void UpdateWorkout() {
             return;
     }
 
-    Object newValue = null; // Initialize to null
-    boolean validInput = false;
+    Object newValue = null;
+	boolean validInput = false;
 
-    while (!validInput) {
-        try {
-            System.out.println("Enter the new value for " + attributeName + ": ");
-            switch (attributeName) {
-                case "duration":
-                case "underwaterdepth":
-                    newValue = input.nextDouble(); 
-					if ((double)newValue <= 0) { 
+	while (!validInput) {
+		try {
+			System.out.println("Enter the new value for " + attributeName + ": ");
+			
+			switch (attributeName) {
+				case "duration":
+				case "underwaterdepth":
+				case "cyclingpower":
+				case "totalweightlifted":
+				case "cyclingspeed":
+				case "weight":
+					newValue = input.nextDouble(); 
+					if ((double) newValue <= 0) { 
 						System.out.println("Invalid input, please enter a positive number.");
-						validInput = false;
 					} else {
-						validInput = true; 
+						validInput = true;
 					}
 					break;
-                case "heartrate":
-                case "intensity":
-                case "cyclingpower":
-                case "cyclingspeed":
-                case "speed":
-                case "weight":
-                case "totalweightlifted":
-                case "numberofsets":
-                case "laps":
-                    validInput = true;
-                    break;
-                case "swimmingstyle":
-                    while (true) {
-                        String styleInput = input.nextLine();
-                        if (isValidSwimmingStyle(styleInput)) {
-                            newValue = styleInput;
-                            validInput = true; 
-                            break;
-                        } else {
-                            System.out.println("Invalid swimming style. Please enter a valid style (freestyle, breaststroke, backstroke, butterfly.");
-                        }
-                    }
-                    break;
-                default:
-                    System.out.println("Unknown attribute: " + attributeName);
-                    return;
-            }
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input. Please enter a valid value for " + attributeName + ".");
-            input.nextLine(); 
-        }
-    }
+	
+				case "heartrate":
+				case "speed":
+				case "numberofsets":
+				case "laps":
+					newValue = input.nextInt(); 
+					if ((int) newValue <= 0) {
+						System.out.println("Invalid input, please enter a positive number.");
+					} else {
+						validInput = true;
+					}
+					break;
+	
+				case "intensity":
+					while (true) {
+						System.out.println("Enter intensity (A for Low, B for Medium, C for High): ");
+						String intensityInput = input.next().toUpperCase();
+						char intensity = intensityInput.charAt(0);
+						
+						if (intensity == 'A' || intensity == 'B' || intensity == 'C') {
+							newValue = intensity;
+							validInput = true;
+							break;
+						} else {
+							System.out.println("Invalid intensity. Please enter L, M, or H.");
+						}
+					}
+					break;
+	
+				case "swimmingstyle":
+					while (true) {
+						System.out.println("Enter swimming style (freestyle, breaststroke, backstroke, butterfly): ");
+						String styleInput = input.nextLine();
+						if (isValidSwimmingStyle(styleInput)) {
+							newValue = styleInput;
+							validInput = true; 
+							break;
+						} else {
+							System.out.println("Invalid swimming style. Please enter a valid style (freestyle, breaststroke, backstroke, butterfly).");
+						}
+					}
+					break;
+	
+				default:
+					System.out.println("Unknown attribute: " + attributeName);
+					return;
+			}
+			
+		} catch (InputMismatchException e) {
+			System.out.println("Invalid input. Please enter a valid value for " + attributeName + ".");
+			input.nextLine();
+		}
+	}
 
     try {
         selectedWorkout.updateWorkout(attributeName, newValue);
@@ -374,9 +417,6 @@ public static void UpdateWorkout() {
 	
 		System.out.println("Choose an option: 1. Log Meal 2. Log Water");
 		int choice = input.nextInt();
-		if (choice <= 0) { 
-			System.out.println("Invalid input, please enter a positive number.");
-		}
 		try {
 		if (choice == 1) {
 			System.out.println("Enter meal name: ");
