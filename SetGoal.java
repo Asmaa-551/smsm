@@ -70,68 +70,75 @@ public class SetGoal {
             case 2:
                 weeklyGoalStartTime = LocalDate.now().with(WeekFields.of(Locale.getDefault()).dayOfWeek(), 1).atStartOfDay(); // Set to start of the week
                 System.out.println("Setting Weekly Goals:");
-                System.out.print("Calories Burned: ");
-                weeklyGoalCalories = input.nextInt();
-                if ( weeklyGoalCalories> 0) {
-					break;
-				} else {
-					System.out.println("Please enter a positive number.");
-				}
-                System.out.print("Workout Duration (minutes): ");
-                weeklyDurationGoal = input.nextDouble();
-                if ( weeklyDurationGoal> 0) {
-					break;
-				} else {
-					System.out.println("Please enter a positive number.");
-				}
-                System.out.print("Water Intake (liters): ");
-                weeklyWaterGoal = input.nextDouble();
-                if ( weeklyWaterGoal> 0) {
-					break;
-				} else {
-					System.out.println("Please enter a positive number.");
-				}
-                System.out.print("Protein Intake (grams): ");
-                weeklyProteinGoal = input.nextDouble();
-                if (weeklyProteinGoal > 0) {
-					break;
-				} else {
-					System.out.println("Please enter a positive number.");
-				}
+                do {
+                    System.out.print("Weekly Calories Burned Goal: ");
+                    weeklyGoalCalories = input.nextInt();
+                    if (weeklyGoalCalories < 0) {
+                        System.out.println("Please enter a positive value.");
+                    }
+                } while (weeklyGoalCalories < 0);
+                
+                do {
+                    System.out.print("Weekly Workout Duration (minutes): ");
+                    weeklyDurationGoal = input.nextDouble();
+                    if (weeklyDurationGoal < 0) {
+                        System.out.println("Please enter a positive value.");
+                    }
+                } while (weeklyDurationGoal < 0);
+                
+                do {
+                    System.out.print("Weekly Water Intake (liters): ");
+                    weeklyWaterGoal = input.nextDouble();
+                    if (weeklyWaterGoal < 0) {
+                        System.out.println("Please enter a positive value.");
+                    }
+                } while (weeklyWaterGoal < 0);
+                
+                do {
+                    System.out.print("Weekly Protein Intake (grams): ");
+                    weeklyProteinGoal = input.nextDouble();
+                    if (weeklyProteinGoal < 0) {
+                        System.out.println("Please enter a positive value.");
+                    }
+                } while (weeklyProteinGoal < 0);
+                
                 System.out.println("Weekly goals updated successfully!");
                 break;
             
             case 3:
                 monthlyGoalStartTime = LocalDate.now().withDayOfMonth(1).atStartOfDay(); // Set to start of the month
                 System.out.println("Setting Monthly Goals:");
-                System.out.print("Calories Burned: ");
-                monthlyGoalCalories = input.nextInt();
-                if (monthlyGoalCalories > 0) {
-					break;
-				} else {
-					System.out.println("Please enter a positive number.");
-				}
-                System.out.print("Workout Duration (minutes): ");
-                monthlyDurationGoal = input.nextDouble();
-                if (monthlyDurationGoal > 0) {
-					break;
-				} else {
-					System.out.println("Please enter a positive number.");
-				}
-                System.out.print("Water Intake (liters): ");
-                monthlyWaterGoal = input.nextDouble();
-                if (monthlyWaterGoal > 0) {
-					break;
-				} else {
-					System.out.println("Please enter a positive number.");
-				}
-                System.out.print("Protein Intake (grams): ");
-                monthlyProteinGoal = input.nextDouble();
-                if (monthlyProteinGoal > 0) {
-					break;
-				} else {
-					System.out.println("Please enter a positive number.");
-				}
+                do {
+                    System.out.print("Monthly Calories Burned Goal: ");
+                    monthlyGoalCalories = input.nextInt();
+                    if (monthlyGoalCalories < 0) {
+                        System.out.println("Please enter a positive value.");
+                    }
+                } while (monthlyGoalCalories < 0);
+                
+                do {
+                    System.out.print("Monthly Workout Duration (minutes): ");
+                    monthlyDurationGoal = input.nextDouble();
+                    if (monthlyDurationGoal < 0) {
+                        System.out.println("Please enter a positive value.");
+                    }
+                } while (monthlyDurationGoal < 0);
+                
+                do {
+                    System.out.print("Monthly Water Intake (liters): ");
+                    monthlyWaterGoal = input.nextDouble();
+                    if (monthlyWaterGoal < 0) {
+                        System.out.println("Please enter a positive value.");
+                    }
+                } while (monthlyWaterGoal < 0);
+                
+                do {
+                    System.out.print("Monthly Protein Intake (grams): ");
+                    monthlyProteinGoal = input.nextDouble();
+                    if (monthlyProteinGoal < 0) {
+                        System.out.println("Please enter a positive value.");
+                    }
+                } while (monthlyProteinGoal < 0);
                 System.out.println("Monthly goals updated successfully!");
                 break;
             
